@@ -1,6 +1,7 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 #include <string>
+
 using namespace std;
 
 class Process {
@@ -9,22 +10,21 @@ private:
     long long PID = 0, memoryUsage = 0 , sessionID = 0;
 public:
     Process(const string& name, const string& session_name, const string& status,
-        long long pid = 0, long long memory_usage = 0, long long session_id){}
-
-    string GetStatus();
+        long long pid, long long memory_usage, long long session_id);
 
     string GetImageName();
 
     string GetSessionName();
 
-    long long GetPid();
+    string GetStatus();
 
-    long long GetMemoryUsage();
+    long long GetPid() const;
 
-    long long GetSessionID();
+    long long GetMemoryUsage() const;
+
+    long long GetSessionID() const;
 
     void SetStatus(const string& status);
-
 
     void SetMemoryUsage(long long memory_usage);
 };
