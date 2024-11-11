@@ -1,0 +1,3 @@
+C:/Users/HP/OneDrive/Desktop/My_code/programs_code/C++ codes/Some-Tasks-and-Games/Smallest_ID/Problem_1/cmake-build-debug/CMakeFiles/Problem_1.dir
+C:/Users/HP/OneDrive/Desktop/My_code/programs_code/C++ codes/Some-Tasks-and-Games/Smallest_ID/Problem_1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/HP/OneDrive/Desktop/My_code/programs_code/C++ codes/Some-Tasks-and-Games/Smallest_ID/Problem_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
