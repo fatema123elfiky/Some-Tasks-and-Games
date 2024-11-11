@@ -26,9 +26,7 @@ public:
     void SetStatus(const string& status);
 
 
-    void set_memory_usage(long long memory_usage){
-        memoryUsage = memory_usage;
-    }
+    void SetMemoryUsage(long long memory_usage);
 };
 
 #endif
