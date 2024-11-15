@@ -6,13 +6,12 @@ using namespace std;
 
 
 /*
- * @File      : A1_T1_S23_20231109.cpp
- * @brief     : This Program contains Different Problems/Games that serve different Tasks
+ * @File      : A1_T1_S23_20230064.cpp
+ * @brief     : This Program contains problem 1
  * @auther    : Alaa Tarek Mohamed Salah Mohamed El-Den Ahmed
  * @ID        : 20230064
  * @Section   : S23
  * @date      : 15 Nov 2024
- * @Details   : This program contains Problems 1 :
  */
 
 
