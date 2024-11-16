@@ -1,128 +1,145 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
+#include <string>
+#include <cctype> // For isdigit
 using namespace std;
 
-bool valid(int row,int column,int R,int C){
+// Function to validate that input is a positive integer
+int get_positive_integer(const string &prompt) {
+    string input;
+    int value;
+    while (true) {
+        cout << prompt;
+        cin >> input;
 
-    if(row<0||row>=R||column<0||column>=C)
-        return false;
-    else
-        return true;
+        // Check if input is all digits
+        bool valid = !input.empty() && all_of(input.begin(), input.end(), ::isdigit);
+        if (valid) {
+            value = stoi(input);
+            break;
+        } else {
+            cout << "Invalid input. Please enter a positive integer.\n";
+        }
+    }
+    return value;
 }
 
-class Universe{
+// Check if the cell is within bounds
+bool valid(int row, int column, int R, int C) {
+    return row >= 0 && row < R && column >= 0 && column < C;
+}
+
+class Universe {
 private:
-    vector<int>directions{-1,1,0,0,-1,1,-1,1};
-    vector<int>directions2{0,0,-1,1,-1,1,1,-1};
-    vector<vector<char>>grid;
-    void Run(int row,int column,int R,int C ){
-        int alive=0,dead=0;
+    vector<vector<char>> grid;
+    int rows, cols;
+
+    // Count the number of alive neighbors for a given cell
+    int count_neighbors(int row, int column) {
+        vector<int> dRow{-1, -1, -1, 0, 1, 1, 1, 0};
+        vector<int> dCol{-1, 0, 1, 1, 1, 0, -1, -1};
+        int alive = 0;
+
         for (int i = 0; i < 8; ++i) {
-            if(valid(row+directions[i],column+directions2[i],R,C)){
-              if(grid[row][column]=='*')
-                  alive++;
-              else{
-                  dead++;
-              }
-
+            int newRow = row + dRow[i];
+            int newCol = column + dCol[i];
+            if (valid(newRow, newCol, rows, cols) && grid[newRow][newCol] == '*') {
+                alive++;
             }
-
         }
-        if(grid[row][column]=='*'&&alive<2){
-            grid[row][column]='.';
-        }else if((alive==2||alive==3)&&grid[row][column]=='*')
-            grid[row][column]='*';
-        else if(alive>3&&grid[row][column]=='*'){
-            grid[row][column]='.';
-        }else if(grid[row][column]=='.'&&alive==3)
-            grid[row][column]='*';
-
+        return alive;
     }
+
 public:
-    //.-->dead , *-->alive
+    //. --> dead, * --> alive
+    Universe(int row, int column) : rows(row), cols(column), grid(row, vector<char>(column, '.')) {}
 
-    Universe(int row,int column):grid(vector<vector<char>>(row,vector<char>(column) )){
-        for (int i = 0; i < grid.size(); ++i) {
-            for (int j = 0; j < grid[i].size(); ++j) {
-                grid[i][j]='.';
-            }
-        }
-    };
-
-    void intialize(vector<vector<char>> & grid){
-        this->grid=grid;
-    }
-
-    void reset(){
-        for (int i = 0; i < grid.size(); ++i) {
-            for (int j = 0; j < grid[i].size(); ++j) {
-               grid[i][j]='.';
+    // Initialize grid with a starting layout
+    void initialize(const vector<pair<int, int>> &liveCells) {
+        for (auto &[r, c] : liveCells) {
+            if (valid(r, c, rows, cols)) {
+                grid[r][c] = '*';
             }
         }
     }
 
-    long long count_neighbors(){
-        long long count=0;
-        for (int i = 0; i < grid.size(); ++i) {
-            for (int j = 0; j < grid[i].size(); ++j) {
-                if(grid[i][j] == '*'){
-                    count++;
+    // Reset all cells to dead
+    void reset() {
+        for (auto &row : grid) {
+            fill(row.begin(), row.end(), '.');
+        }
+    }
+
+    // Display the current state of the grid
+    void display() {
+        for (const auto &row : grid) {
+            for (char cell : row) {
+                cout << cell << " ";
+            }
+            cout << '\n';
+        }
+        cout << '\n';
+    }
+
+    // Update the grid for the next generation
+    void next_generation() {
+        vector<vector<char>> newGrid = grid;
+
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                int aliveNeighbors = count_neighbors(i, j);
+
+                if (grid[i][j] == '*' && (aliveNeighbors < 2 || aliveNeighbors > 3)) {
+                    newGrid[i][j] = '.'; // Cell dies
+                } else if (grid[i][j] == '.' && aliveNeighbors == 3) {
+                    newGrid[i][j] = '*'; // Cell becomes alive
                 }
+                // Else, state remains the same
             }
         }
-        return count;
+        grid = newGrid; // Update grid with new state
     }
 
-    void display(){
-        for (int i = 0; i < grid.size(); ++i) {
-            for (int j = 0; j < grid[i].size(); ++j) {
-                cout<<grid[i][j]<<" ";
-            }
-            cout<<'\n';
+    // Run the game for a certain number of generations
+    void run() {
+        int generations = get_positive_integer("Enter the number of generations to run: ");
+
+        for (int i = 0; i < generations; ++i) {
+            cout << "Generation " << i + 1 << ":\n";
+            next_generation();
+            display();
         }
-
     }
-
-    void run(int runs){
-        for (int i = 0; i < runs; ++i) {
-
-            for (int j = 0; j < grid.size(); ++j) {
-                for (int k = 0; k < grid[i].size() ; ++k) {
-
-                   Run(j,k,grid.size(),grid[i].size());
-
-                }
-            }
-
-
-        }
-
-    }
-
-   void  next_generation(){
-        run(1);
-    }
-
 };
 
-
-
 int main() {
+    int rows = get_positive_integer("Enter the number of rows: ");
+    int cols = get_positive_integer("Enter the number of columns: ");
 
-Universe u(20,50);
-vector<vector<char>>v(20,vector<char>(50,'.'));
-v[11][20]=v[10][20]=v[13][22]='*';
-u.intialize(v);
-u.display();
-cout<<"alive : \n"<<u.count_neighbors()<<"\n\n\n";
-cout<<"generation : "<<'\n';
-    u.next_generation();
+    Universe u(rows, cols);
+
+    int numCells = get_positive_integer("Enter the number of initial live cells: ");
+
+    vector<pair<int, int>> liveCells;
+    cout << "Enter the coordinates of the live cells (row and column, 0-based indexing):\n";
+    for (int i = 0; i < numCells; ++i) {
+        int r = get_positive_integer("  Row: ");
+        int c = get_positive_integer("  Column: ");
+        liveCells.emplace_back(r, c);
+    }
+
+    u.initialize(liveCells);
+    cout << "Initial State:\n";
     u.display();
-    cout<<"\n\n\n";
-    u.run(3);
-    u.display();
 
+    char continueGame = 'y';
+    while (continueGame == 'y' || continueGame == 'Y') {
+        u.run();
+        cout << "Do you want to continue? (y/n): ";
+        cin >> continueGame;
+    }
 
-
-
+    cout << "Game Over. Thanks for playing!\n";
+    return 0;
 }
