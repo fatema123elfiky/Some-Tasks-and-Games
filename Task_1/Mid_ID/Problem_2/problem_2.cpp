@@ -51,8 +51,10 @@ public:
          string ins;
 
          while (!file.eof()){
-
+         x: 
                 file>>ins;
+                if(ins.empty())
+                    goto x;
                 string store;
                 for(auto & c :ins){
 
@@ -62,7 +64,7 @@ public:
 
                }
 
-             if(!IsFound(store))
+             if(!IsFound(store)&&!store.empty())
              {
                  strings.push_back(store);
              }
@@ -75,11 +77,11 @@ public:
 
             string store;
             for (int i = 0; i < name.size(); ++i) {
-                if(!ispunct(name[i])||name[i]!=' '){
+                if(!ispunct(name[i])&&name[i]!=' '){
                     store.push_back(tolower(name[i]));
                 }else{
 
-                    if(!IsFound(store)){ strings.push_back(store); }
+                    if(!IsFound(store)&&!store.empty()){ strings.push_back(store); }
                     store.clear();
 
                 }
@@ -98,11 +100,11 @@ public:
         //adding a string seeking weather there is a punctuation or not to remove it and add it to the query
         string store;
         for (int i = 0; i < added.size(); ++i) {
-            if(!ispunct(added[i])||added[i]!=' '){
+            if(!ispunct(added[i])&&added[i]!=' '){
                 store.push_back(tolower(added[i]));
             }else{
 
-                if(!IsFound(store)){ strings.push_back(store); }
+                if(!IsFound(store)&&!store.empty()){ strings.push_back(store); }
                 store.clear();
 
             }
@@ -191,10 +193,14 @@ public:
     }
 
     void display(){
-        for (int i = 0; i < strings.size(); ++i) {
-            cout<<strings[i]<<' ';
+
+        cout<<'['<<' ';
+        for (int i = 0; i < strings.size()-1; ++i) {
+            cout<<strings[i]<<',';
         }
-        cout<<'\n';
+        cout<<strings[strings.size()-1]<<' ';
+        cout<<']'<<'\n';
+        
     }//done
 
 };
@@ -226,7 +232,7 @@ void Demo_1(StringSet * set1,StringSet * set2){
     set1->clear();
     cout<<"first query after clear its size is : "<<set1->NumberOfStrings()<<'\n';
 
-    cout<<"Enter the word you want to remove : ";
+    cout<<"Enter the word you want to remove from the second query : ";
     cin>>add;cin.ignore();
 
     set2->remove(add);
@@ -292,9 +298,10 @@ int main(){
     while (true){
         vector<StringSet * >sets(2);
         string choice;
-        cout<<"Choose from the menu for the first query: \n\n 1.form new query by adding file \n"
-            << "2.form new query by adding file\n3.Exit\n";
+        cout<<"Choose from the menu for the first query: \n\n1.form new query by adding file \n"
+            << "2.form new query by adding string\n3.Exit\n";
 
+        cout<<"Enter your choice : ";
         cin>>choice;
         while(choice!="1"&&choice!="2"&&choice!="3"){
             cout<<"Enter a valid choice : ";
@@ -319,9 +326,10 @@ int main(){
         }
 
 
-        cout<<"Choose from the menu for the second query: \n\n 1.form new query by adding file \n"
-            << "2.form new query by adding file\n3.Exit\n";
+        cout<<"Choose from the menu for the second query: \n\n1.form new query by adding file \n"
+            << "2.form new query by adding string\n3.Exit\n";
 
+        cout<<"Enter your choice : ";
         cin>>choice;
         while(choice!="1"&&choice!="2"&&choice!="3"){
             cout<<"Enter a valid choice : ";
@@ -350,6 +358,7 @@ int main(){
         cout <<"Choose from the menu which one to implement:\n"
         <<"1.Demo_1\n"<<"2.Demo_2\n3.Demo_3\n4.Exit\n";
 
+        cout<<"Enter your choice : ";
         cin>>choice;
         while(choice!="1"&&choice!="2"&&choice!="3"&&choice!="4"){
             cout<<"Enter a valid choice : ";
