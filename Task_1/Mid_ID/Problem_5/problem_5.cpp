@@ -49,7 +49,7 @@ public:
     string getter_session(){
         return session;
     }
-    
+
     string getter_sessionName(){
         return sessionName;
     }
@@ -120,16 +120,17 @@ public:
             sort(processes.begin(),processes.end(), MemoSort);
         }
 
-        cout<<"Image Name                     PID Session Name        Session#    Mem Usage\n"
-            <<"========================= ======== ================ =========== ============\n";
+        cout<<"Image Name                                 PID        Session Name        Session#     Mem Usage\n"
+            <<"==================================         ========   ================    ===========  ===================\n";
 
         for (int i = 0; i < processes.size(); ++i) {
 
-                cout << left << setw(25) << processes[i]->getter_name()<<' ';
-                cout <<right<< setw(8)<<processes[i]->getter_PID() << ' ';
-                cout << left << setw(16) << processes[i]->getter_sessionName()<<' ';
-                cout <<right<<setw(11)<< processes[i]->getter_session() << ' ';
+                cout << left << setw(43) << processes[i]->getter_name()<<' ';
+                cout <<left<< setw(11)<<processes[i]->getter_PID() << ' ';
+                cout << left << setw(20) << processes[i]->getter_sessionName()<<' ';
+                cout <<left<<setw(13)<< processes[i]->getter_session() << ' ';
                 cout << right << setw(12) << processes[i]->getter_memo() << ' ' << 'k' << '\n';
+
 
         }
 
