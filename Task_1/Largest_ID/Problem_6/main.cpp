@@ -22,7 +22,23 @@ void Help() {
     cout << "- Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.\n";
 }
 
-
+/**
+ * @brief Prompts the user to select the grid dimensions for the game.
+ *
+ * This function displays a menu to the user, allowing them to either choose from
+ * a set of predefined grid sizes (fixed dimensions) or enter custom dimensions
+ * (number of rows and columns). The selected dimensions are used to initialize
+ * and return a new `Universe` object with the specified grid size.
+ *
+ * The fixed dimensions available are:
+ *  - 20 x 50
+ *  - 20 x 20
+ *  - 30 x 30
+ *
+ * The user also has the option to manually input custom dimensions.
+ *
+ * @return Universe A new `Universe` object initialized with the chosen grid dimensions.
+ */
 Universe GetDimintion(){
     // Display a menu to make user choose fixed dimensions or enter it from a file
     string menu = "What do you want?\n1) Fixed dimensions\n2) Custom dimensions\nYour Choice: ";
@@ -48,7 +64,6 @@ Universe GetDimintion(){
 
     Universe Game(rows, cols);
     return Game;
-
 }
 
 
