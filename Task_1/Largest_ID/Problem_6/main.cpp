@@ -1,145 +1,92 @@
-#include <algorithm>
 #include <iostream>
 #include <vector>
 #include <string>
-#include <cctype> // For isdigit
+
+#include "Universe.h"
+
 using namespace std;
 
-// Function to validate that input is a positive integer
-int get_positive_integer(const string &prompt) {
-    string input;
-    int value;
-    while (true) {
-        cout << prompt;
-        cin >> input;
-
-        // Check if input is all digits
-        bool valid = !input.empty() && all_of(input.begin(), input.end(), ::isdigit);
-        if (valid) {
-            value = stoi(input);
-            break;
-        } else {
-            cout << "Invalid input. Please enter a positive integer.\n";
-        }
-    }
-    return value;
+/**
+ * @brief Displays the rules for the Game of Life.
+ *
+ * @details prints a brief introduction
+ * to the Game of Life, followed by the rules governing cell survival
+ * and reproduction in the game.
+ */
+void Help() {
+    cout << "Welcome to the Game of Life!\n";
+    cout << "Rules:\n";
+    cout << "- Any live cell with fewer than two live neighbors dies, as if by underpopulation.\n";
+    cout << "- Any live cell with two or three live neighbors lives on to the next generation.\n";
+    cout << "- Any live cell with more than three live neighbors dies, as if by overpopulation.\n";
+    cout << "- Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.\n";
 }
 
-// Check if the cell is within bounds
-bool valid(int row, int column, int R, int C) {
-    return row >= 0 && row < R && column >= 0 && column < C;
-}
 
-class Universe {
-private:
-    vector<vector<char>> grid;
+Universe GetDimintion(){
+    // Display a menu to make user choose fixed dimensions or enter it from a file
+    string menu = "What do you want?\n1) Fixed dimensions\n2) Custom dimensions\nYour Choice: ";
+    vector<string> choices = {"1","2"};
+    string choice = Universe::checkMenu(menu, choices);
     int rows, cols;
 
-    // Count the number of alive neighbors for a given cell
-    int count_neighbors(int row, int column) {
-        vector<int> dRow{-1, -1, -1, 0, 1, 1, 1, 0};
-        vector<int> dCol{-1, 0, 1, 1, 1, 0, -1, -1};
-        int alive = 0;
-
-        for (int i = 0; i < 8; ++i) {
-            int newRow = row + dRow[i];
-            int newCol = column + dCol[i];
-            if (valid(newRow, newCol, rows, cols) && grid[newRow][newCol] == '*') {
-                alive++;
-            }
-        }
-        return alive;
+    if(choice == "1"){
+        string FixedDimensionMenu = "Choose one of them:\n1) 20 x 50\n2) 20 x 20\n3) 30 x 30\nYour Choice: ";
+        vector<string> fixedDimensions = {"1", "2", "3"};
+        string fixedDimension = Universe::checkMenu(FixedDimensionMenu, fixedDimensions);
+        if(fixedDimension == "1")
+            rows = 20, cols = 50;
+        else if(fixedDimension == "2")
+            rows = 20, cols = 20;
+        else
+            rows = 30, cols = 30;
+    }
+    else{
+        rows = Universe::getCorrectNumber("Enter No. of rows:");
+        cols = Universe::getCorrectNumber("Enter No. of columns:");
     }
 
-public:
-    //. --> dead, * --> alive
-    Universe(int row, int column) : rows(row), cols(column), grid(row, vector<char>(column, '.')) {}
+    Universe Game(rows, cols);
+    return Game;
 
-    // Initialize grid with a starting layout
-    void initialize(const vector<pair<int, int>> &liveCells) {
-        for (auto &[r, c] : liveCells) {
-            if (valid(r, c, rows, cols)) {
-                grid[r][c] = '*';
-            }
-        }
-    }
+}
 
-    // Reset all cells to dead
-    void reset() {
-        for (auto &row : grid) {
-            fill(row.begin(), row.end(), '.');
-        }
-    }
-
-    // Display the current state of the grid
-    void display() {
-        for (const auto &row : grid) {
-            for (char cell : row) {
-                cout << cell << " ";
-            }
-            cout << '\n';
-        }
-        cout << '\n';
-    }
-
-    // Update the grid for the next generation
-    void next_generation() {
-        vector<vector<char>> newGrid = grid;
-
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < cols; ++j) {
-                int aliveNeighbors = count_neighbors(i, j);
-
-                if (grid[i][j] == '*' && (aliveNeighbors < 2 || aliveNeighbors > 3)) {
-                    newGrid[i][j] = '.'; // Cell dies
-                } else if (grid[i][j] == '.' && aliveNeighbors == 3) {
-                    newGrid[i][j] = '*'; // Cell becomes alive
-                }
-                // Else, state remains the same
-            }
-        }
-        grid = newGrid; // Update grid with new state
-    }
-
-    // Run the game for a certain number of generations
-    void run() {
-        int generations = get_positive_integer("Enter the number of generations to run: ");
-
-        for (int i = 0; i < generations; ++i) {
-            cout << "Generation " << i + 1 << ":\n";
-            next_generation();
-            display();
-        }
-    }
-};
 
 int main() {
-    int rows = get_positive_integer("Enter the number of rows: ");
-    int cols = get_positive_integer("Enter the number of columns: ");
+    // Define the main menu text and the valid choices for the user.
+    string menu = "# === Welcome to life Game === #\n1) Start the game\n2) Help\n3) Exit\nYour choice:";
+    vector<string> choices{"1", "2", "3"};
 
-    Universe u(rows, cols);
+    while (true) {
+        // Display the main menu and get the user's choice.
+        string choice = Universe::checkMenu(menu, choices);
 
-    int numCells = get_positive_integer("Enter the number of initial live cells: ");
+        if (choice == "1") {
+            Universe Game = GetDimintion();
+            Game.play();
+        }
+        else if (choice == "2") {
+            // Display the help menu with the game rules.
+            Help();
+            continue;
+        }
+        else{
+            cout << "Thanks for using our game!";
+            break;
 
-    vector<pair<int, int>> liveCells;
-    cout << "Enter the coordinates of the live cells (row and column, 0-based indexing):\n";
-    for (int i = 0; i < numCells; ++i) {
-        int r = get_positive_integer("  Row: ");
-        int c = get_positive_integer("  Column: ");
-        liveCells.emplace_back(r, c);
+        }
+
+
+        // After the game session ends, ask the user if they want to play again.
+        string EndMenu = "DO you want to Play again (Y/N)? : ";
+        vector<string> EndChoice = {"Y", "N", "n", "y"};
+        string endChoice = Universe::checkMenu(EndMenu, EndChoice);
+
+        if (endChoice == "N" || endChoice == "n") {
+            cout << "Thanks for playing!\n";
+            break;
+        }
     }
 
-    u.initialize(liveCells);
-    cout << "Initial State:\n";
-    u.display();
-
-    char continueGame = 'y';
-    while (continueGame == 'y' || continueGame == 'Y') {
-        u.run();
-        cout << "Do you want to continue? (y/n): ";
-        cin >> continueGame;
-    }
-
-    cout << "Game Over. Thanks for playing!\n";
     return 0;
 }
