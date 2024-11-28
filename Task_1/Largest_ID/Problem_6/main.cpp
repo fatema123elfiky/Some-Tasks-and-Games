@@ -69,7 +69,7 @@ Universe GetDimintion(){
 
 int main() {
     // Define the main menu text and the valid choices for the user.
-    string menu = "# === Welcome to life Game === #\n1) Start the game\n2) Help\n3) Exit\nYour choice:";
+    string menu = "# === Welcome to life Game === #\n1) Start the game\n2) Vogel’s Approximation ModelHelp\n3) Exit\nYour choice:";
     vector<string> choices{"1", "2", "3"};
 
     while (true) {
