@@ -44,7 +44,7 @@ void Connect_Board::display_board()
         }
         cout<<'\n';
         for (int j = 0; j < columns ; ++j) {
-            cout<<"===";
+            cout<<"====";
         }
         cout<<'\n';
     }
@@ -72,6 +72,7 @@ bool Connect_Board::update_board(int x, int y, char symbol)
 
 }
 
+// Revise
 bool Connect_Board:: is_win()
 {
     //bool Is_win= false;
@@ -83,8 +84,9 @@ bool Connect_Board:: is_win()
                     if(board[i][j]!=board[i][j-k]) {
                         win= false;
                         break;
-                    }else
-                        win=true;
+                    }else if(board[i][j]==board[i][j-k]&&board[i][j]!='.') {
+                        win = true;
+                    }
                 }
             }else if(j+1<columns && j+2<columns && j+3<columns){//front horizontal
                 for (int k = 1; k <=3 ; ++k) {
@@ -92,7 +94,7 @@ bool Connect_Board:: is_win()
                     {
                         win= false;
                         break;
-                    }else
+                    }else if(board[i][j]==board[i][j+k]&&board[i][j]!='.')
                         win=true;
                 }
             }else if(i-1>=0&&i-2>=0&&i-3>=0){//back vertical
@@ -101,7 +103,7 @@ bool Connect_Board:: is_win()
                     {
                         win= false;
                         break;
-                    }else
+                    }else if(board[i][j]==board[i-k][j]&&board[i][j]!='.')
                         win=true;
                 }
             }else if(i+1<rows&&i+2<rows&&i+3<rows){//front vertical
@@ -110,7 +112,7 @@ bool Connect_Board:: is_win()
                     {
                         win= false;
                         break;
-                    }else
+                    }else if(board[i][j]==board[i+k][j]&&board[i][j]!='.')
                         win=true;
                 }
             }else if(i-1>=0&&j-1>=0&&i-2>=0&&j-2>=0&&i-3>=0&&j-3>=0){//back off diagonal
@@ -119,7 +121,7 @@ bool Connect_Board:: is_win()
                     {
                         win= false;
                         break;
-                    }else
+                    }else if(board[i][j]==board[i-k][j-k]&&board[i][j]!='.')
                         win=true;
                 }
             }else if(i+1<rows&&j+1<columns&&i+2<rows&&j+2<columns&&i+3<rows&&j+3<columns){//front off diagonal
@@ -128,7 +130,7 @@ bool Connect_Board:: is_win()
                     {
                         win= false;
                         break;
-                    }else
+                    }else if(board[i][j]!='.'&&board[i][j]==board[i+k][j+k])
                         win=true;
                 }
             }else if(i+1<rows&&j-1>=0&&i+2<rows&&j-2>=0&&i+3<rows&&j-3>=0){// back main diagonal
@@ -137,7 +139,7 @@ bool Connect_Board:: is_win()
                     {
                         win= false;
                         break;
-                    }else
+                    }else if(board[i][j]==board[i+k][j-k]&&board[i][j]!='.')
                         win=true;
                 }
             }else if(i-1>=0&&j+1<columns&&i-2>=0&&j+2<columns&&i-3>=0&&j+3<columns){//ba
@@ -146,7 +148,7 @@ bool Connect_Board:: is_win()
                     {
                         win= false;
                         break;
-                    }else
+                    }else if(board[i][j]==board[i-k][j+k]&&board[i][j]!='.')
                         win=true;
                 }
             }
@@ -160,7 +162,8 @@ bool Connect_Board:: is_win()
 
 bool Connect_Board::is_draw(){
 
-    //we can &&add is_win or not too it will be dummy to be added
+    //we can add && !is_win or not too it will be dummy to be added
+    // and will not be efficient as win fun is O(n^2)
     if(n_moves==6*7)
         return true;
     return false;
@@ -176,7 +179,11 @@ bool Connect_Board:: game_is_over()
 
 //class Connect_Player
 
-Connect_Player::Connect_Player(string n, char c):Player<char>(n,c){}
+Connect_Player::Connect_Player(string n, char c):Player<char>(n,c){
+    // for some reason are commented for trial
+    /*this->name=n;
+    this->symbol=c;*/
+}
 
 void Connect_Player:: getmove(int& x, int& y){
 
@@ -184,6 +191,12 @@ void Connect_Player:: getmove(int& x, int& y){
     cin>>y;
 
 }
+
+
+
+
+
+
 
 //class Connect_Random_Player
 

@@ -10,6 +10,8 @@
 
 class Connect_Board:public Board<char>{
 
+public:
+
     Connect_Board();
 
     ~Connect_Board();
@@ -30,6 +32,7 @@ class Connect_Board:public Board<char>{
 
 class Connect_Player:public Player<char>{
 
+public:
     Connect_Player(string n, char c);
     void getmove(int& x, int& y);
 
@@ -37,6 +40,8 @@ class Connect_Player:public Player<char>{
 
 
 class Connect_Random_Player:public RandomPlayer<char>{
+
+public:
 
     Connect_Random_Player(char c);
 
