@@ -9,7 +9,8 @@
 
 class Math_Tic_Tac_Teo_board: public Board<int>
 {
-
+private:
+    vector<bool>Valid_Number;
 public:
 
     Math_Tic_Tac_Teo_board();
@@ -26,13 +27,16 @@ public:
 
     bool  is_win();
 
+
+
 };
 
 class Math_Tic_Tac_Teo_player:public Player<int>
 {
-protected:
+private:
     vector<int>Numbers;
-    vector<bool>Valid_Number;
+    //vector<bool>Valid_Number;
+
 public:
 
    Math_Tic_Tac_Teo_player(string n, int c);// 1 -> player / 2 -> player 2
@@ -43,8 +47,12 @@ public:
 
 class Math_Tic_Tac_Teo_random_player:public RandomPlayer<int>{
 
+private:
+    vector<int>Numbers;
+   // vector<bool>Valid_Number;
 public:
-
+    Math_Tic_Tac_Teo_random_player(int c);
+    void getmove(int& x, int& y);
 
 };
 
