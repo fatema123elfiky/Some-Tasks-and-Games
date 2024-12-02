@@ -187,6 +187,7 @@ Connect_Player::Connect_Player(string n, char c):Player<char>(n,c){
 
 void Connect_Player:: getmove(int& x, int& y){
 
+    x=5;
     cout<<"Please Enter the Column number : ";
     cin>>y;
 
@@ -202,13 +203,14 @@ void Connect_Player:: getmove(int& x, int& y){
 
 Connect_Random_Player::Connect_Random_Player(char c) : RandomPlayer<char>(c)
 {
-   this->name="Random Computer Player";// but it will change the value as the parent set a value before
+   //this->name="Random Computer Player";// but it will change the value as the parent set a value before
    srand(static_cast<unsigned int>(time(0)));
+   this->dimension=7;
 
 }
 
 void Connect_Random_Player::getmove(int& x, int& y)
 {
-   x=rand()%6;
-   y=rand()%7;
+   x=5;
+   y=rand()%dimension;
 }
