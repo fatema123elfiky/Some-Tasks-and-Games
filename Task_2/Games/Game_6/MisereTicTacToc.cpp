@@ -6,6 +6,7 @@ MisereTicTacToc::MisereTicTacToc(){
     this->rows = 3;
     this->columns = 3;
     this->board = new string*[3];
+    this->n_moves = 0;
 
     for (int i = 0; i < this->rows; ++i)
         board[i] = new string[3];
@@ -24,6 +25,7 @@ bool MisereTicTacToc::update_board(int x, int y, string symbol){
     if(this->board[x][y] != "-")
         return false;
 
+    this->n_moves++;
     this->board[x][y] = symbol;
     return true;
 }
@@ -31,7 +33,7 @@ bool MisereTicTacToc::update_board(int x, int y, string symbol){
 void MisereTicTacToc::display_board(){
     for (int i = 0; i < this->rows; ++i){
         for(int j = 0; j < this->columns; ++j)
-            cout << this->board[i][j] << "|";
+            cout << this->board[i][j] << (j != this->columns-1 ? "|" : "");;
         cout << "______" << endl;
         cout << endl;
     }
@@ -66,7 +68,7 @@ bool MisereTicTacToc::is_draw(){
 }
 
 bool MisereTicTacToc::game_is_over(){
-    return MisereTicTacToc::is_win() || MisereTicTacToc::is_draw();
+    return n_moves == 9;
 }
 
 void MisereTicTacTocPlayer::getmove(int& x, int& y){
@@ -110,8 +112,3 @@ void MisereTicTacTocRandomPlayer::getmove(int& x, int& y){
     x = rand() % this->dimension;
     y = rand() % this->dimension;
 }
-
-
-
-
-

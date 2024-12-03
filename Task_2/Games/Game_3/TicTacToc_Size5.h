@@ -9,14 +9,36 @@ using namespace std;
 
 class TicTacToc_Size5 : public Board<string>{
 
+public:
+    TicTacToc_Size5();
+
+    ~TicTacToc_Size5() override;
+
+    bool update_board(int x, int y, string symbol) override;
+
+    void display_board() override;
+
+    bool is_win() override;
+
+    bool is_draw() override;
+
+    bool game_is_over() override;
+
 };
 
 class TicTacTocPlayer : public Player<string>{
+public:
+    TicTacTocPlayer(const string& n, const string& symbol) : Player<string>(n, symbol) {}
+    explicit TicTacTocPlayer(const string& symbol) : Player<string>(symbol) {}
 
+    void getmove(int& x, int& y) override;
 };
 
 class TicTacTocRandomPlayer : public RandomPlayer<string>{
+public:
+    explicit TicTacTocRandomPlayer(const string& symbol): RandomPlayer<string>(symbol){}
 
+    void getmove(int& x, int& y) override;
 };
 
 #endif
