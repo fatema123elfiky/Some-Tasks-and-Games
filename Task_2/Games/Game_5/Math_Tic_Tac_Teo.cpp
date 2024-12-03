@@ -4,12 +4,6 @@
 
 #include "Math_Tic_Tac_Teo.h"
 
-bool isnum(string & s ){
-    for(auto & c: s)
-        if(!isdigit(c))
-            return false ;
-    return true;
-}
 
 
 //Class Math_Tic_Tac_Teo_board
@@ -27,6 +21,9 @@ Math_Tic_Tac_Teo_board::Math_Tic_Tac_Teo_board(){
         for (int j = 0; j < columns; ++j) {
             board[i][j]=0;
         }
+    }
+    for (int i = 0; i < 10; ++i) {
+        Valid_Number.push_back(true);
     }
 
 }
@@ -63,13 +60,28 @@ bool Math_Tic_Tac_Teo_board::update_board(int x, int y, int symbol)
     //could I validate in the get move function of the player that if he is the first player should be odd otherwise
     /*||symbol<1||symbol>9*///not imp
 
-    if(x>=rows||x<0||y>=columns||y<0)
+    if((x>=rows||x<0||y>=columns||y<0)&&!Valid_Number[symbol]){
+       cout<<"Try again !!\n\n";
+       return false;
+    }
+
+    if(x>=rows||x<0||y>=columns||y<0) {
+       cout<<"Out of Bounderies !! \n";
         return false;
-    if(board[x][y]!=0)
+    }
+
+    if(board[x][y]!=0) {
+        cout<<"This place is filled with number !! \n\n";
         return false;
+    }
     else{
+        if(!Valid_Number[symbol]) {
+           cout<<" This number is taken before !!\n\n";
+            return false;
+        }
         board[x][y]=symbol;
         n_moves++;
+        Valid_Number[symbol]=false;
         return true;
     }
 
@@ -114,51 +126,43 @@ bool Math_Tic_Tac_Teo_board:: is_win()
 }
 
 
+
 //Class Math_Tic_Tac_Teo_player
 
 Math_Tic_Tac_Teo_player::Math_Tic_Tac_Teo_player(string n , int c): Player<int>(n,c){
     if(c==1) {
         Numbers = {1, 3, 5, 7, 9};
-        Valid_Number = {true, true, true, true,true};
     }
     else {
         Numbers = {2, 4, 6, 8};
-        Valid_Number={true,true,true,true};
     }
+    //Valid_Number = {true, true, true, true,true,true,true,true,true};
 
+   // setBoard(); in the main we will set the board in the player to validate only  and update_board will not validate
 }
 
 void Math_Tic_Tac_Teo_player:: getmove(int& x, int& y)
 {
-   cout<<"Enter the number you want to put from that list :  ";
-    for (int i = 0; i < Numbers.size(); ++i) {
-         if(Valid_Number[i])
-             cout<<Numbers[i]<<" , ";
+ X:
+   cout<<"Enter a different ";
+    if(symbol%2!=0)
+    {
+        cout<<" odd number you want to put from 1 to 9 : ";
+    }else{
+        cout<<" even number you want to put from 2 to 8 : ";
     }
-    cout<<'\n';
 
-    string num;
+
+    int num;
     cout<<"Enter the number : ";
     cin>>num;
 
-    while (!isnum(num))
-    {
-        X:
-
-        cout<<"Enter a valid number : ";
-        cin>>num;
-        if(isnum(num)){
-            int nums=stoi(num);
-            auto found=find(Numbers.begin(),Numbers.end(),nums);
-            if(found!=Numbers.end()&&Valid_Number[found-Numbers.begin()])
-                break;
-            else
-                goto X;
-        }
-
+    if(find(Numbers.begin(),Numbers.end(),num)==Numbers.end()) {
+        cout<<"Enter a number in your valid range !!\n\n ";
+        goto X;
     }
+    symbol=num;
 
-    symbol= stoi(num);
 
     cout<<"Enter the position of the cell : ";
     cin>>x>>y;
@@ -166,3 +170,43 @@ void Math_Tic_Tac_Teo_player:: getmove(int& x, int& y)
 
 
 }
+
+
+
+//Class Math_Tic_Tac_Teo_random_player
+Math_Tic_Tac_Teo_random_player::Math_Tic_Tac_Teo_random_player(int c): RandomPlayer<int>(c)
+{
+    if(c==1) {
+        Numbers = {1, 3, 5, 7, 9};
+        //Valid_Number = {true, true, true, true,true};
+    }
+    else {
+        Numbers = {2, 4, 6, 8};
+       // Valid_Number={true,true,true,true};
+    }
+
+    srand(static_cast<unsigned int>(time(0)));
+
+    this->dimension=3;
+
+
+}
+
+void Math_Tic_Tac_Teo_random_player::getmove(int &x, int &y) {
+    int num;
+    if(symbol%2!=0){
+        num = rand() % 10;
+        while (find(Numbers.begin(),Numbers.end(),num)==Numbers.end()){
+            num = rand() % 10;
+        }
+    }else{
+        num = rand() % 9;
+        while (find(Numbers.begin(),Numbers.end(),num)==Numbers.end()){
+            num = rand() % 9;
+        }
+    }
+    symbol=num;
+    x=rand()%dimension;
+    y=rand()%dimension;
+}
+

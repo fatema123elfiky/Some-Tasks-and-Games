@@ -19,7 +19,7 @@ public:
     void display_board();
 
     //of course a value will be given to y and symbol but x no
-    bool update_board(int x=5, int y=0, char symbol='X');
+    bool update_board(int x, int y, char symbol);
 
     bool is_win();
 
