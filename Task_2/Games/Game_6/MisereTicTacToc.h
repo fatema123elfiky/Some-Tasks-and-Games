@@ -2,7 +2,7 @@
 
 #ifndef MISERETICTACTOC_H
 #define MISERETICTACTOC_H
-#include <iostream>
+
 #include "../../src/BoardGame_Classes.h"
 
 
@@ -25,13 +25,18 @@ public:
 
 };
 
-class MisereTicTacTocPlayer final : public Player<string>{
+class MisereTicTacTocPlayer final : public Player<string> {
 public:
+    MisereTicTacTocPlayer(const string& n, const string& symbol) : Player<string>(n, symbol) {}
+    explicit MisereTicTacTocPlayer(const string& symbol) : Player<string>(symbol) {}
+
     void getmove(int& x, int& y) override;
 };
 
-class MisereTicTacTocRandomPlayer : public RandomPlayer<string>{
+class MisereTicTacTocRandomPlayer final : public RandomPlayer<string> {
 public:
+    explicit MisereTicTacTocRandomPlayer(const string& symbol): RandomPlayer<string>(symbol){}
+
     void getmove(int& x, int& y) override;
 };
 

@@ -1,4 +1,6 @@
 #include "MisereTicTacToc.h"
+#include <iostream>
+#include <cstdlib>
 
 MisereTicTacToc::MisereTicTacToc(){
     this->rows = 3;
@@ -66,4 +68,50 @@ bool MisereTicTacToc::is_draw(){
 bool MisereTicTacToc::game_is_over(){
     return MisereTicTacToc::is_win() || MisereTicTacToc::is_draw();
 }
+
+void MisereTicTacTocPlayer::getmove(int& x, int& y){
+    string tempx, tempy;
+
+    while (true){
+        bool check = false;
+        cout << "Enter the number of rows to move: ";
+        getline(cin, tempx);
+        for (char i : tempx){
+            if (!isdigit(i)){
+                check = true;
+                break;
+            }
+        }
+        if (check)
+            cout << "Please enter the a valid number\n";
+        else
+            break;;
+    }
+    while (true){
+        bool check = false;
+        cout << "Enter the number of column to move: ";
+        getline(cin, tempy);
+        for (char i : tempy){
+            if (!isdigit(i)){
+                check = true;
+                break;
+            }
+        }
+        if (check)
+            cout << "Please enter the a valid number\n";
+        else
+            break;
+    }
+    x = stoi(tempx) - 1;
+    y = stoi(tempy) - 1;
+}
+
+void MisereTicTacTocRandomPlayer::getmove(int& x, int& y){
+    x = rand() % this->dimension;
+    y = rand() % this->dimension;
+}
+
+
+
+
 
