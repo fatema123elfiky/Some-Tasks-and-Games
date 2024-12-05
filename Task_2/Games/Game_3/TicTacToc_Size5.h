@@ -26,17 +26,17 @@ public:
 
 };
 
-class TicTacTocPlayer : public Player<string>{
+class TicTacTocPlayer final : public Player<string>{
 public:
     TicTacTocPlayer(const string& n, const string& symbol) : Player<string>(n, symbol) {}
-    explicit TicTacTocPlayer(const string& symbol) : Player<string>(symbol) {}
-
+    ~TicTacTocPlayer() override;
     void getmove(int& x, int& y) override;
 };
 
-class TicTacTocRandomPlayer : public RandomPlayer<string>{
+class TicTacTocRandomPlayer final: public RandomPlayer<string>{
 public:
-    explicit TicTacTocRandomPlayer(const string& symbol): RandomPlayer<string>(symbol){}
+    explicit TicTacTocRandomPlayer( const string& symbol) : RandomPlayer<string>(symbol) {};
+    ~TicTacTocRandomPlayer() override;
 
     void getmove(int& x, int& y) override;
 };

@@ -26,7 +26,7 @@ bool MisereTicTacToc::update_board(int x, int y, string symbol){
         return false;
 
     this->n_moves++;
-    this->board[x][y] = symbol;
+    this->board[x][y] = (symbol != "X" && symbol != "O" ? this->board[x][y] : symbol);
     return true;
 }
 
@@ -84,10 +84,14 @@ void MisereTicTacTocPlayer::getmove(int& x, int& y){
                 break;
             }
         }
-        if (check)
-            cout << "Please enter the a valid number\n";
-        else
-            break;;
+        if (!check){
+            if(this->boardPtr->update_board(stoi(tempx), stoi(tempy),"_")){
+                cout << "Please Enter in the range of 1 to 3\n";
+                continue;
+            }
+            break;
+        }
+        cout << "Please Enter a valid number\n";
     }
     while (true){
         bool check = false;
@@ -99,16 +103,22 @@ void MisereTicTacTocPlayer::getmove(int& x, int& y){
                 break;
             }
         }
-        if (check)
-            cout << "Please enter the a valid number\n";
-        else
+        if (!check){
+            if(this->boardPtr->update_board(stoi(tempx), stoi(tempy),"_")){
+                cout << "Please Enter in the range of 1 to 3\n";
+                continue;
+            }
             break;
+        }
+        cout << "Please Enter a valid number\n";
     }
     x = stoi(tempx) - 1;
     y = stoi(tempy) - 1;
 }
 
 void MisereTicTacTocRandomPlayer::getmove(int& x, int& y){
-    x = rand() % this->dimension;
-    y = rand() % this->dimension;
+    do{
+        x = rand() % this->dimension;
+        y = rand() % this->dimension;
+    }while (!this->boardPtr->update_board(x, y, "_"));
 }
