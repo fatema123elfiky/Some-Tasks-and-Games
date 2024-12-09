@@ -1,3 +1,15 @@
 # ninja log v6
-72	1009	7547390355756452	CMakeFiles/Task_2.dir/main.cpp.obj	4cb0d60ec3547f97
-1010	1180	7547390365147164	Task_2.exe	aa9a7cc5a289fd30
+13	1392	7554568495932431	CMakeFiles/Task_2.dir/main.cpp.obj	4cb0d60ec3547f97
+31	835	7554562143303543	CMakeFiles/Task_2.dir/Games/Game_6/MisereTicTacToc.cpp.obj	13752a4ea7a1cc4b
+1393	1837	7554568509728770	Task_2.exe	11907a865185e8d
+121	1662	7554437770157464	CMakeFiles/Task_2.dir/Games/Game_2/Four_in_a_row.cpp.obj	2e343b1d623be74d
+135	1947	7554437770296512	CMakeFiles/Task_2.dir/Games/Game_5/Math_Tic_Tac_Teo.cpp.obj	cd7ba1c7bea0303e
+41	928	7554438763316899	CMakeFiles/Task_2.dir/Games/Game_7/TIcTacTocSize4.cpp.obj	809dd84ba761d41
+32	1318	7554438763227114	CMakeFiles/Task_2.dir/Games/Game_3/TicTacToc_Size5.cpp.obj	847a8c688205eac2
+20	1306	7554571635589153	build.ninja	944ddecbe89b52fb
+14	886	7554573131127079	CMakeFiles/Task_2.dir/main.cpp.obj	4cb0d60ec3547f97
+888	1166	7554573139870103	Task_2.exe	11907a865185e8d
+12	889	7554574938086782	CMakeFiles/Task_2.dir/main.cpp.obj	4cb0d60ec3547f97
+890	1244	7554574946870173	Task_2.exe	11907a865185e8d
+38	1266	7554580581721908	CMakeFiles/Task_2.dir/Games/Game_6/MisereTicTacToc.cpp.obj	13752a4ea7a1cc4b
+1267	1668	7554580594009937	Task_2.exe	11907a865185e8d

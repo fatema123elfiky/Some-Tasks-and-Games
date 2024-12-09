@@ -179,7 +179,6 @@ int TicTacTocAIPlayer::calculateMinMax(string s, bool isMaximizing){
 
     return bestValue;
 }
-}
 
 
 pair<int, int> TicTacTocAIPlayer::BestMove(){
