@@ -40,6 +40,16 @@ public:
     void getmove(int& x, int& y) override;
 };
 
+class MisereTicTacTacAIPlayer final : public Player<string>{
+public:
+    explicit MisereTicTacTacAIPlayer(const string& symbol);
+    ~MisereTicTacTacAIPlayer() override;
+    void getmove(int& x, int& y) override;
+
+private:
+    int calculateMinMax(string s, bool isMaximizing);
+    std::pair<int, int> getBestMove();
+};
 
 
 #endif
