@@ -21,7 +21,7 @@ MisereTicTacToc::MisereTicTacToc(){
 MisereTicTacToc::~MisereTicTacToc()= default;
 
 bool MisereTicTacToc::update_board(int x, int y, string symbol){
-    if(x<0||x>=this->rows||y<0||y>=this->columns)
+    if(x<0||x>=this->rows||y<0||y>=this->columns || (this->board[x][y] != "-" && symbol != "-"))
         return false;
     if (symbol == "-"){
         this->n_moves--;
