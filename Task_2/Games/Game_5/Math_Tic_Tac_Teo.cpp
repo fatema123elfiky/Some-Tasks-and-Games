@@ -4,6 +4,15 @@
 
 #include "Math_Tic_Tac_Teo.h"
 
+bool Isdigit(string s){
+    for(auto c :s){
+        if(!isdigit(c))
+            return false;
+    }
+    return true;
+}
+
+
 
 
 //Class Math_Tic_Tac_Teo_board
@@ -92,7 +101,7 @@ bool Math_Tic_Tac_Teo_board::is_draw()
     //we can add && !is_win or not too it will be dummy to be added
     // and will not be efficient as win fun is O(n^2)
 
-    if(n_moves==3*3)
+    if(n_moves==3*3&& !is_win())
         return true;
     return false;
 }
@@ -137,7 +146,6 @@ Math_Tic_Tac_Teo_player::Math_Tic_Tac_Teo_player(string n , int c): Player<int>(
     else {
         Numbers = {2, 4, 6, 8};
     }
-    //Valid_Number = {true, true, true, true,true,true,true,true,true};
 
    // setBoard(); in the main we will set the board in the player to validate only  and update_board will not validate
 }
@@ -154,19 +162,32 @@ void Math_Tic_Tac_Teo_player:: getmove(int& x, int& y)
     }
 
 
-    int num;
+    string num;
     cout<<"Enter the number : ";
     cin>>num;
+    if(!Isdigit(num)){
+        cout<<"Enter a valid number please !!\n\n";
+        goto X;
+    }
 
-    if(find(Numbers.begin(),Numbers.end(),num)==Numbers.end()) {
+    if(find(Numbers.begin(),Numbers.end(),stoi(num))==Numbers.end()) {
         cout<<"Enter a number in your valid range !!\n\n ";
         goto X;
     }
-    symbol=num;
+    symbol=stoi(num);
 
-
+again:
     cout<<"Enter the position of the cell : ";
-    cin>>x>>y;
+    string X,Y;
+    cout<<"Rows :";cin>>X;
+    cout<<"Columns : ";cin>>Y;
+
+    while(!Isdigit(X)||!Isdigit(Y)){
+        cout<<"Enter correct numbers please!!\n\n ";
+        goto again;
+    }
+    x= stoi(X);
+    y= stoi(Y);
 
 
 
@@ -220,12 +241,8 @@ Math_Tic_Tac_Teo_AI_player::Math_Tic_Tac_Teo_AI_player(int c): Player<int>(c){
 
     if(c==1){
         Numbers={1,3,5,7,9};
-
-       // moves=0;
     }else {
         Numbers = {2,4,6,8};
-
-       // moves=1;
     }
 
     this->name="AI_Player";
@@ -250,7 +267,7 @@ void Math_Tic_Tac_Teo_AI_player::getmove(int &x, int &y)
 }
 
 
-// NEED SOME REVISION
+// NEED SOME REVISION AND TEST
 int Math_Tic_Tac_Teo_AI_player::backtrack(int& x,int & y,int& symbol,int c, bool isMaximizing,bool first)
 {
 

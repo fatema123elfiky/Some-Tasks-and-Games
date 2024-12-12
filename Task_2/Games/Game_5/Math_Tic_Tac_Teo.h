@@ -39,7 +39,7 @@ class Math_Tic_Tac_Teo_player:public Player<int>
 {
 private:
     vector<int>Numbers;
-    //vector<bool>Valid_Number;
+
 
 public:
 
@@ -53,7 +53,7 @@ class Math_Tic_Tac_Teo_random_player:public RandomPlayer<int>{
 
 private:
     vector<int>Numbers;
-   // vector<bool>Valid_Number;
+
 public:
     Math_Tic_Tac_Teo_random_player(int c);
     void getmove(int& x, int& y);
@@ -64,8 +64,6 @@ class Math_Tic_Tac_Teo_AI_player:public Player<int>{
 private:
 
     vector<int>Numbers;
-    //Math_Tic_Tac_Teo_board * board;
-
     int backtrack(int &x,int& y,int & symbol,int c, bool isMaximizing,bool first);
 
 
