@@ -69,7 +69,17 @@ bool Math_Tic_Tac_Teo_board::update_board(int x, int y, int symbol)
     //could I validate in the get move function of the player that if he is the first player should be odd otherwise
     /*||symbol<1||symbol>9*///not imp
 
-    if(symbol!=0&&(x>=rows||x<0||y>=columns||y<0)&&!Valid_Number[symbol]){
+    // for the ai part in the backtrack the undo part
+
+    if(symbol==0){
+        board[x][y]=0;
+        n_moves--;
+        Valid_Number[symbol] = true;
+        return true;
+    }
+
+
+    if(/*symbol!=0&&*/(x>=rows||x<0||y>=columns||y<0)&&!Valid_Number[symbol]){
        cout<<"Try again !!\n\n";
        return false;
     }
@@ -84,13 +94,13 @@ bool Math_Tic_Tac_Teo_board::update_board(int x, int y, int symbol)
         return false;
     }
     else{
-        if(symbol!=0&&!Valid_Number[symbol]) {
+        if(/*symbol!=0&&*/!Valid_Number[symbol]) {
           // cout<<" This number is taken before !!\n\n";
             return false;
         }
         board[x][y]=symbol;
         n_moves++;
-        if(symbol!=0){ Valid_Number[symbol] = false; }
+        /*if(symbol!=0){*/ Valid_Number[symbol] = false; //}
         return true;
     }
 
@@ -302,7 +312,10 @@ int Math_Tic_Tac_Teo_AI_player::backtrack(int& x,int & y,int& symbol,int c, bool
         bestvalue=INT_MIN;
     else
         bestvalue=INT_MAX;
+
     int Symbol,X,Y;
+
+
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
             for (int k = 0; k < player.size(); ++k) {
