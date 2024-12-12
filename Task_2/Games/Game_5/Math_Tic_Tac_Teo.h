@@ -6,6 +6,8 @@
 #define GAMES_MATH_TIC_TAC_TEO_H
 #include "../../src/BoardGame_Classes.h"
 #include <algorithm>
+#include <utility>
+
 
 class Math_Tic_Tac_Teo_board: public Board<int>
 {
@@ -26,6 +28,8 @@ public:
     bool game_is_over();
 
     bool  is_win();
+
+
 
 
 
@@ -53,6 +57,22 @@ private:
 public:
     Math_Tic_Tac_Teo_random_player(int c);
     void getmove(int& x, int& y);
+
+};
+
+class Math_Tic_Tac_Teo_AI_player:public Player<int>{
+private:
+
+    vector<int>Numbers;
+    //Math_Tic_Tac_Teo_board * board;
+
+    int backtrack(int &x,int& y,int & symbol,int c, bool isMaximizing,bool first);
+
+
+public:
+    Math_Tic_Tac_Teo_AI_player(int c);
+    void getmove(int &x, int &y) ;
+
 
 };
 
