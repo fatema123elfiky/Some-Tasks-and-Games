@@ -4,6 +4,17 @@
 
 #include "Four_in_a_row.h"
 
+bool Isdigit(string s){
+    for(auto c :s){
+        if(!isdigit(c))
+            return false;
+    }
+    return true;
+}
+
+
+
+
 //class Connect_Board
 
 Connect_Board::Connect_Board() {
@@ -54,14 +65,35 @@ void Connect_Board::display_board()
 bool Connect_Board::update_board(int x, int y, char symbol)
 {
  // the coming one (x) is always (5) then change it
-    if(y<0||y>=columns)
+    //x=5;
+
+
+    //That part for undo part in the ai player backtrack !!
+    if(symbol=='.'){
+        while(x>0){
+            if(board[x][y]!='.'){
+                board[x][y]='.';
+                n_moves--;
+                return true;
+            }
+            x--;
+        }
+    }
+
+
+
+    if(y<0||y>=columns) {
+        cout<<"Out of Bounderies !! \n\n";
         return false;
+    }
     while (x>=0&&board[x][y]!='.'){
         x--;
     }
 
-    if(x<0)
+    if(x<0) {
+        //cout<<"Try another column !!\n";
         return false;
+    }
     else {
         board[x][y] = symbol;
         n_moves++;
@@ -164,7 +196,7 @@ bool Connect_Board::is_draw(){
 
     //we can add && !is_win or not too it will be dummy to be added
     // and will not be efficient as win fun is O(n^2)
-    if(n_moves==6*7)
+    if(n_moves==6*7&& !is_win())
         return true;
     return false;
 
@@ -176,6 +208,9 @@ bool Connect_Board:: game_is_over()
        return true;
     return false;
 }
+
+
+
 
 //class Connect_Player
 
@@ -189,11 +224,15 @@ void Connect_Player:: getmove(int& x, int& y){
 
     x=5;
     cout<<"Please Enter the Column number : ";
-    cin>>y;
+    string Y;
+    cin>>Y;
+    while(!Isdigit(Y)){
+        cout<<"Please Enter a correct number: ";
+        cin>>Y;
+    }
+    y=stoi(Y);
 
 }
-
-
 
 
 
@@ -213,4 +252,79 @@ void Connect_Random_Player::getmove(int& x, int& y)
 {
    x=5;
    y=rand()%dimension;
+}
+
+//AI_PLAYER_CONNECT_FOUR CLASS
+AI_Player_Connect_Four::AI_Player_Connect_Four(char c): Player<char>(c) {
+    this->name="AI-Player";
+}
+
+void AI_Player_Connect_Four::getmove(int &x, int &y) {
+
+    x=5;
+    backtrack(y,symbol,true,true);
+
+}
+
+int AI_Player_Connect_Four::backtrack( int &y, char symbol, bool IsMaximizing, bool first) {
+
+    // base_case
+    if(boardPtr->is_win()){
+        if(!IsMaximizing){
+            return 1;
+        }else{
+            return -1;
+        }
+    }
+    if(boardPtr->is_draw()){
+        return 0;
+    }
+
+
+    //opponent
+    char opponent;
+    if(symbol=='X')
+        opponent='O';
+    else
+        opponent='X';
+
+
+    int best_value;
+    if(IsMaximizing){
+        best_value=INT_MIN;
+    }else
+        best_value=INT_MAX;
+
+    int initial_y;
+
+
+    for (int i = 0; i < 7; ++i) {
+
+        if(boardPtr->update_board(5,i,symbol)){//do
+
+            int score= backtrack(y,opponent,!IsMaximizing,false);//recurse
+
+            if(IsMaximizing){
+                if(score>best_value){
+                    best_value=score;
+                    initial_y=i;
+                }
+            }else{
+                if(score<best_value){
+                    best_value=score;
+                    initial_y=i;
+                }
+            }
+
+
+            boardPtr->update_board(5,i,'.');//undo
+        }
+
+    }
+
+    if(first)
+        y=initial_y;
+    return best_value;
+
+
 }
