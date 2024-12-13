@@ -11,4 +11,7 @@ add_executable(Task_2 main.cpp
         Games/Game_3/TicTacToc_Size5.cpp
         Games/Game_6/MisereTicTacToc.h
         Games/Game_6/MisereTicTacToc.cpp
+        Games/Game_8/Tic_Tac_Toe_9x9.h
+        Games/Game_8/Tic_Tac_Toe_9x9.cpp
+        Games/Game_8/Tic_Tac_Toe_3x3.cpp
 )

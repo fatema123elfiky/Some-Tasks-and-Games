@@ -79,6 +79,18 @@ build CMakeFiles/Task_2.dir/Games/Game_6/MisereTicTacToc.cpp.obj: CXX_COMPILER__
   OBJECT_DIR = CMakeFiles\Task_2.dir
   OBJECT_FILE_DIR = CMakeFiles\Task_2.dir\Games\Game_6
 
+build CMakeFiles/Task_2.dir/Games/Game_8/Tic_Tac_Toe_9x9.cpp.obj: CXX_COMPILER__Task_2_unscanned_Debug C$:/Users/HP/OneDrive/Desktop/My_code/programs_code/C++$ codes/Some-Tasks-and-Games/Task_2/Games/Game_8/Tic_Tac_Toe_9x9.cpp || cmake_object_order_depends_target_Task_2
+  DEP_FILE = CMakeFiles\Task_2.dir\Games\Game_8\Tic_Tac_Toe_9x9.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Task_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\Task_2.dir\Games\Game_8
+
+build CMakeFiles/Task_2.dir/Games/Game_8/Tic_Tac_Toe_3x3.cpp.obj: CXX_COMPILER__Task_2_unscanned_Debug C$:/Users/HP/OneDrive/Desktop/My_code/programs_code/C++$ codes/Some-Tasks-and-Games/Task_2/Games/Game_8/Tic_Tac_Toe_3x3.cpp || cmake_object_order_depends_target_Task_2
+  DEP_FILE = CMakeFiles\Task_2.dir\Games\Game_8\Tic_Tac_Toe_3x3.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Task_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\Task_2.dir\Games\Game_8
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Task_2
@@ -87,7 +99,7 @@ build CMakeFiles/Task_2.dir/Games/Game_6/MisereTicTacToc.cpp.obj: CXX_COMPILER__
 #############################################
 # Link the executable Task_2.exe
 
-build Task_2.exe: CXX_EXECUTABLE_LINKER__Task_2_Debug CMakeFiles/Task_2.dir/main.cpp.obj CMakeFiles/Task_2.dir/Games/Game_2/Four_in_a_row.cpp.obj CMakeFiles/Task_2.dir/Games/Game_5/Math_Tic_Tac_Teo.cpp.obj CMakeFiles/Task_2.dir/Games/Game_3/TicTacToc_Size5.cpp.obj CMakeFiles/Task_2.dir/Games/Game_6/MisereTicTacToc.cpp.obj
+build Task_2.exe: CXX_EXECUTABLE_LINKER__Task_2_Debug CMakeFiles/Task_2.dir/main.cpp.obj CMakeFiles/Task_2.dir/Games/Game_2/Four_in_a_row.cpp.obj CMakeFiles/Task_2.dir/Games/Game_5/Math_Tic_Tac_Teo.cpp.obj CMakeFiles/Task_2.dir/Games/Game_3/TicTacToc_Size5.cpp.obj CMakeFiles/Task_2.dir/Games/Game_6/MisereTicTacToc.cpp.obj CMakeFiles/Task_2.dir/Games/Game_8/Tic_Tac_Toe_9x9.cpp.obj CMakeFiles/Task_2.dir/Games/Game_8/Tic_Tac_Toe_3x3.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Task_2.dir

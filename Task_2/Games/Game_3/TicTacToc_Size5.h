@@ -2,13 +2,14 @@
 #ifndef TICTACTOC_SIZE5_H
 #define TICTACTOC_SIZE5_H
 #include <iostream>
+#include <map>
 #include <string>
 #include "../../src/BoardGame_Classes.h"
 
 using namespace std;
 
 class TicTacToc_Size5 : public Board<string>{
-
+    map<string, int> winningNumber;
 public:
     TicTacToc_Size5();
 
@@ -23,7 +24,6 @@ public:
     bool is_draw() override;
 
     bool game_is_over() override;
-
 };
 
 class TicTacTocPlayer final : public Player<string>{
@@ -37,7 +37,6 @@ class TicTacTocRandomPlayer final: public RandomPlayer<string>{
 public:
     explicit TicTacTocRandomPlayer( const string& symbol) : RandomPlayer<string>(symbol) {};
     ~TicTacTocRandomPlayer() override;
-
     void getmove(int& x, int& y) override;
 };
 class TicTacTocAIPlayer final : public Player<string>{
