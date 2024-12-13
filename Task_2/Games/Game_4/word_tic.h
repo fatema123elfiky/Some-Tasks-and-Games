@@ -46,7 +46,7 @@ public:
 template <typename T>
 class Word_Random_Player : public RandomPlayer<T>{
 public:
-    Word_Random_Player (T symbol);
+    Word_Random_Player ();
     void getmove(int &x, int &y) ;
 };
 
@@ -215,7 +215,7 @@ this->symbol=s[0];
 
 // Constructor for X_O_Random_Player
 template <typename T>
-Word_Random_Player<T>::Word_Random_Player(T symbol) : RandomPlayer<T>(symbol) {
+Word_Random_Player<T>::Word_Random_Player() : RandomPlayer<T>(' ') {
     this->dimension = 3;
     this->name = "Random Computer Player";
     srand(static_cast<unsigned int>(time(0)));  // Seed the random number generator
