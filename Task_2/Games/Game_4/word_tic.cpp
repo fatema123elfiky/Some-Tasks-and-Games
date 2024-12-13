@@ -33,7 +33,7 @@ while(choice < 1 || choice > 3) {
             players[0] = new Word_Player<char>(playerXName);
         break;
         case 2:
-            players[0] = new Word_Random_Player<char>(' ');
+            players[0] = new Word_Random_Player<char>();
         break;
         case 3:
             //players[0] = new Word_MinMax_Player<char>(' ');
@@ -62,7 +62,7 @@ while(choice < 1 || choice > 3) {
             players[1] = new Word_Player<char>(player2Name);
         break;
         case 2:
-            players[1] = new Word_Random_Player<char>('O');
+            players[1] = new Word_Random_Player<char>();
         break;
         case 3:
             //        players[1] = new Word_MinMax_Player<char>('O');
