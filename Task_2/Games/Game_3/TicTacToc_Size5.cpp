@@ -46,13 +46,13 @@ void TicTacToc_Size5::display_board(){
 }
 
 bool TicTacToc_Size5::is_win(){
-    if(this->n_moves != 25)
+    if(this->n_moves < 25)
         return false;
 
     map<string,int> players;
 
-    for(int i = 0 ; i < this->columns ; i++){
-        for(int j = 0 ; j < this->rows ; j++){
+    for(int i = 0 ; i < this->columns-2 ; i++){
+        for(int j = 0 ; j < this->rows-2 ; j++){
             if(this->board[i][j] == this->board[i+1][j] && this->board[i+2][j] == this->board[i][j])
                 players[this->board[i][j]]++;
 
@@ -79,7 +79,7 @@ bool TicTacToc_Size5::is_win(){
 
 
 bool TicTacToc_Size5::is_draw(){
-    return this->n_moves == 25 && !is_win();
+    return this->n_moves > 24 && !is_win();
 }
 
 bool TicTacToc_Size5::game_is_over(){
@@ -95,7 +95,7 @@ void TicTacTocPlayer::getmove(int& x, int& y){
         cout << "Enter the number of rows to move: ";
         getline(cin, tempx);
 
-        if(tempx.length() == 1 && stoi(tempx) > 0 && stoi(tempx) < 4)
+        if(tempx.length() == 1 && stoi(tempx) > 0 && stoi(tempx) < 6)
             break;
         cout << "Please Enter a valid number\n";
     }
@@ -104,7 +104,7 @@ void TicTacTocPlayer::getmove(int& x, int& y){
         cout << "Enter the number of colmns to move: ";
         getline(cin, tempy);
 
-        if(tempy.length() == 1 && stoi(tempy) > 0 && stoi(tempy) < 4)
+        if(tempy.length() == 1 && stoi(tempy) > 0 && stoi(tempy) < 6)
             break;
         cout << "Please Enter a valid number\n";
     }
@@ -119,70 +119,4 @@ TicTacTocRandomPlayer::~TicTacTocRandomPlayer() = default;
 void TicTacTocRandomPlayer::getmove(int& x, int& y){
     x = rand() % 5;
     y = rand() % 5;
-}
-TicTacTocAIPlayer::TicTacTocAIPlayer(const string& symbol) : Player(symbol){
-    this->name = "AI Player";
-}
-
-TicTacTocAIPlayer::~TicTacTocAIPlayer() = default;
-
-void TicTacTocAIPlayer::getmove(int& x, int& y){
-    pair<int, int> bestMove = BestMove();
-    x = bestMove.first;
-    y = bestMove.second;
-}
-
-
-
-
-int TicTacTocAIPlayer::calculateMinMax(string s, bool isMaximizing){
-    if (this->boardPtr->is_win())
-        return isMaximizing ? -1 : 1;
-
-    if (this->boardPtr->is_draw())
-        return 0;
-
-    int bestValue = isMaximizing ? INT_MIN : INT_MAX;
-    string opponentSymbol = (s == "X") ? "O" : "X";
-
-    for (int i = 0; i < 5; ++i) {
-        for (int j = 0; j < 5; ++j) {
-            if (this->boardPtr->update_board(i, j, s)) {
-                int value = calculateMinMax(opponentSymbol, !isMaximizing);
-                this->boardPtr->update_board(i, j, "-");
-
-                if (isMaximizing)
-                    bestValue = max(bestValue, value);
-
-                else
-                    bestValue = min(bestValue, value);
-
-            }
-        }
-    }
-
-    return bestValue;
-}
-
-
-pair<int, int> TicTacTocAIPlayer::BestMove(){
-    int bestValue = INT_MIN;
-    std::pair<int, int> bestMove = {-1, -1};
-    string opponentSymbol = (this->symbol == "X") ? "O" : "X";
-
-    for (int i = 0; i < 5; ++i) {
-        for (int j = 0; j < 5; ++j) {
-            if (this->boardPtr->update_board(i, j, this->symbol)) {
-                int moveValue = calculateMinMax(this->symbol, false);
-                this->boardPtr->update_board(i, j, "-");
-
-                if (moveValue > bestValue) {
-                    bestMove = {i, j};
-                    bestValue = moveValue;
-                }
-            }
-        }
-    }
-
-    return bestMove;
 }
