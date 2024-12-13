@@ -17,6 +17,7 @@ bool Isdigit(string s){
 
 //Class Math_Tic_Tac_Teo_board
 
+
 Math_Tic_Tac_Teo_board::Math_Tic_Tac_Teo_board(){
 
     this->rows=3;
@@ -51,6 +52,7 @@ void Math_Tic_Tac_Teo_board::display_board()
     for (int i = 0; i < columns; ++i) {
         cout<<i<<"    ";
     }
+    cout<<"\n\n";
     for (int i = 0; i < rows; ++i){
         cout<<i<<"  ";
         for (int j = 0; j < columns; ++j) {
@@ -149,6 +151,7 @@ bool Math_Tic_Tac_Teo_board:: is_win()
 
 //Class Math_Tic_Tac_Teo_player
 
+
 Math_Tic_Tac_Teo_player::Math_Tic_Tac_Teo_player(string n , int c): Player<int>(n,c){
     if(c==1) {
         Numbers = {1, 3, 5, 7, 9};
@@ -207,8 +210,11 @@ again:
 
 
 //Class Math_Tic_Tac_Teo_random_player
+
+
 Math_Tic_Tac_Teo_random_player::Math_Tic_Tac_Teo_random_player(int c): RandomPlayer<int>(c)
 {
+    this->name="Random Computer Player";
     if(c==1) {
         Numbers = {1, 3, 5, 7, 9};
         //Valid_Number = {true, true, true, true,true};
@@ -247,6 +253,8 @@ void Math_Tic_Tac_Teo_random_player::getmove(int &x, int &y) {
 
 
 //Class  Math_Tic_Tac_Teo_AI_player
+
+
 Math_Tic_Tac_Teo_AI_player::Math_Tic_Tac_Teo_AI_player(int c): Player<int>(c){
 
     if(c==1){
@@ -275,7 +283,6 @@ void Math_Tic_Tac_Teo_AI_player::getmove(int &x, int &y)
 
 
 }
-
 
 // NEED SOME REVISION AND TEST
 int Math_Tic_Tac_Teo_AI_player::backtrack(int& x,int & y,int& symbol,int c, bool isMaximizing,bool first)
