@@ -264,13 +264,7 @@ void UI:: MathTic(Player<int>*player1,Player<int>*player2,Board<int>*board,int t
     Player<int>* playerPtr[2]={player1,player2};
     GameManager<int>manager(board, playerPtr);
     manager.run();
-
-
-
 }
-
-
-
 
 // needs to be implemented //NO AI
 void UI:: TicSize4(Player<string>*player1,Player<string>*player2,Board<string>*board,int type){
@@ -278,6 +272,7 @@ void UI:: TicSize4(Player<string>*player1,Player<string>*player2,Board<string>*b
     string name;cout<<"Enter your name ya first player : ";
     cin>>name;
     player1=new TicTacTocSize4Player(name,"X");
+
     if(type==1){
         cout<<"Enter your name ya second player : ";
         cin>>name;
@@ -287,7 +282,12 @@ void UI:: TicSize4(Player<string>*player1,Player<string>*player2,Board<string>*b
         player2=new TicTacTocSize4RandomPlayer("O");
 
 
+
     Player<string>* playerPtr[2]={player1,player2};
+
+    for(auto i : playerPtr)
+        i->setBoard(board);
+
     GameManager<string>manager(board, playerPtr);
     manager.run();
 

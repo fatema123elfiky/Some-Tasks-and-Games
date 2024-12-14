@@ -1,6 +1,7 @@
 #include "TicTacTocSize4.h"
 #include <algorithm>
 #include <utility>
+
 TicTacTocSize4Board::TicTacTocSize4Board(){
     this->rows = 4;
     this->columns = 4;
@@ -8,7 +9,7 @@ TicTacTocSize4Board::TicTacTocSize4Board(){
     this->board = new string* [rows];
 
     for(int i = 0 ; i < this->columns; i++)
-        this->board[i] = new string[3];
+        this->board[i] = new string[4];
 
     for(int i = 0 ; i < this->rows; i++){
         for(int j = 0 ; j < this->columns; j++){
@@ -34,8 +35,6 @@ TicTacTocSize4Board::~TicTacTocSize4Board() = default;
 
 bool TicTacTocSize4Board::update_board(int x, int y, string symbol){
     if(x < 0 || x >= this->rows || y < 0 || y >= this->columns || (this->board[x][y] != "-" && symbol != "-" && symbol != "!"))
-        return false;
-    if(this->board[x][y]!= "-")
         return false;
 
     if(symbol == "!"){
@@ -69,29 +68,41 @@ bool TicTacTocSize4Board::update_board(int x, int y, string symbol){
 }
 
 void TicTacTocSize4Board::display_board(){
-    for (int i = 0; i < this->rows; ++i){
-        for(int j = 0; j < this->columns; ++j)
+    cout << endl;
+    for (int i = 0; i < 4; ++i){
+        for(int j = 0; j < 4; ++j)
             cout << this->board[i][j] << (j != this->columns-1 ? "|" : "");;
-        cout << "_____--_" << endl;
         cout << endl;
+        cout << "________" << endl;
     }
 }
 
 bool TicTacTocSize4Board::is_win() {
     for (int i = 0; i < this->rows; i++) {
-        for (int j = 0; j < this->columns ; j++) {
-            if (this->board[i][j] != "-" && this->board[i][j] == this->board[i][j+1] && this->board[i][j+1] == this->board[i][j+2] && j < this->columns - 2)
+        for (int j = 0; j < this->columns; j++) {
+            // Check horizontal
+            if (j < this->columns - 2 && this->board[i][j] != "-" &&
+                this->board[i][j] == this->board[i][j+1] && this->board[i][j+1] == this->board[i][j+2])
                 return true;
-            if (this->board[i][j] != "-" && this->board[i][j] == this->board[i+1][j] && this->board[i+1][j] == this->board[i+2][j] && i < this->rows - 2)
+
+            // Check vertical
+            if (i < this->rows - 2 && this->board[i][j] != "-" &&
+                this->board[i][j] == this->board[i+1][j] && this->board[i+1][j] == this->board[i+2][j])
                 return true;
-            if (this->board[i][j] != "-" && this->board[i][j] == this->board[i+1][j+1] && this->board[i+1][j+1] == this->board[i+2][j+2] && i < this->rows - 2 && this->columns - 2)
+
+            // Check diagonal (top-left to bottom-right)
+            if (i < this->rows - 2 && j < this->columns - 2 && this->board[i][j] != "-" &&
+                this->board[i][j] == this->board[i+1][j+1] && this->board[i+1][j+1] == this->board[i+2][j+2])
                 return true;
-            if (this->board[i][j] != "-" && this->board[i][j] == this->board[i+1][j-1] && this->board[i+1][j-1] == this->board[i+2][j-2] && i < this->rows - 2 && j > 1)
+
+            // Check diagonal (top-right to bottom-left)
+            if (i < this->rows - 2 && j > 1 && this->board[i][j] != "-" &&
+                this->board[i][j] == this->board[i+1][j-1] && this->board[i+1][j-1] == this->board[i+2][j-2])
                 return true;
         }
     }
-
     return false;
+
 }
 
 bool TicTacTocSize4Board::is_draw(){
@@ -115,7 +126,7 @@ void TicTacTocSize4Player::getmove(int& x, int& y){
             getline(cin, tempx);
 
             if(tempx.length() == 1 && all_of(tempx.begin(), tempx.end(), ::isdigit)){
-                if(stoi(tempx) > 0 && stoi(tempx) < 4)
+                if(stoi(tempx) > 0 && stoi(tempx) < 5)
                     break;
             }
             cout << "Please Enter a valid number\n";
@@ -125,14 +136,17 @@ void TicTacTocSize4Player::getmove(int& x, int& y){
             cout << "Enter the number of colmns to remove from: ";
             getline(cin, tempy);
 
-            if(tempy.length() == 1 && stoi(tempy) > 0 && stoi(tempy) < 5)
-                break;
+            if(tempy.length() == 1 && all_of(tempy.begin(), tempy.end(), ::isdigit)){
+                if(stoi(tempy) > 0 && stoi(tempy) < 5)
+                    break;
+            }
+
             cout << "Please Enter a valid number\n";
         }
 
         x = placex = stoi(tempx) - 1;
         y = placey = stoi(tempy) - 1;
-    }while(!this->boardPtr->update_board(x,y,"-"));
+    }while(this->boardPtr->update_board(x,y,"-"));
 
     do{
         if(placex == x && placey == y)
@@ -143,7 +157,7 @@ void TicTacTocSize4Player::getmove(int& x, int& y){
             getline(cin, tempx);
 
             if(tempx.length() == 1 && all_of(tempx.begin(), tempx.end(), ::isdigit)){
-                if(stoi(tempx) > 0 && stoi(tempx) < 4)
+                if(stoi(tempx) > 0 && stoi(tempx) < 5)
                     break;
             }
             cout << "Please Enter a valid number\n";
@@ -154,7 +168,7 @@ void TicTacTocSize4Player::getmove(int& x, int& y){
             getline(cin, tempy);
 
             if(tempy.length() == 1 && all_of(tempy.begin(), tempy.end(), ::isdigit)){
-                if(stoi(tempy) > 0 && stoi(tempy) < 4)
+                if(stoi(tempy) > 0 && stoi(tempy) < 5)
                     break;
             }
             cout << "Please Enter a valid number\n";
@@ -162,7 +176,8 @@ void TicTacTocSize4Player::getmove(int& x, int& y){
 
         x = stoi(tempx) - 1;
         y = stoi(tempy) - 1;
-    }while(!this->boardPtr->update_board(x,y,this->symbol) || (placex == x && placey == y));
+    }while(this->boardPtr->update_board(x,y,this->symbol));
+    this->boardPtr->update_board(x, y, "!");
 }
 
 TicTacTocSize4RandomPlayer::TicTacTocSize4RandomPlayer(string symbol): Player<string>(move(symbol)){
@@ -177,13 +192,14 @@ void TicTacTocSize4RandomPlayer::getmove(int& x, int& y){
         x = rand() % 4;
         y = rand() % 4;
         tempx = x;tempy = y;
-    }while(!this->boardPtr->update_board(x,y,"-"));
+    }while(this->boardPtr->update_board(x,y,"-"));
 
     do{
         if(tempx == x && tempy == y)
             this->boardPtr->update_board(x, y, "!");
         x = rand() % 4;
         y = rand() % 4;
-    }while(!this->boardPtr->update_board(x,y,this->symbol) || (x == tempx && y == tempy));
+    }while(this->boardPtr->update_board(x,y,this->symbol));
+    this->boardPtr->update_board(x, y, "!");
 }
 
