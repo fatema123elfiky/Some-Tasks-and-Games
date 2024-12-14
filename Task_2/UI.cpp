@@ -93,7 +93,7 @@ int UI:: display_menu_players(string choice)
     vector<string>choices_1={"1","2","3","4"};
     vector<string>choices_2={"1","2","3"};
     string menu;vector<string>choices;
-    if(choice=="2"||choice=="5" || choice=="6"){
+    if( choice=="6"){
         menu=menu_1;
         choices=choices_1;
     }else{
@@ -124,11 +124,11 @@ void UI:: Connect_4(Player<char>*player1,Player<char>*player2,Board<char>*board,
        cout<<"Enter your name ya second player : ";
        cin>>name;
        player2=new Connect_Player(name,'O');
-   }else if(type==2){
+   }/*else if(type==2){
      player2=new AI_Player_Connect_Four('O');
      // SET BOARD
      player2->setBoard(board);
-   }else if(type==3){
+   }*/else if(type==2){
        player2=new Connect_Random_Player('O');
    }
 
@@ -252,11 +252,11 @@ void UI:: MathTic(Player<int>*player1,Player<int>*player2,Board<int>*board,int t
         cin>>name;
         player2=new Math_Tic_Tac_Teo_player(name,2);
 
-    }else if(type==2){
+    }/*else if(type==2){
         player2=new Math_Tic_Tac_Teo_AI_player(2);
         // SET BOARD
         player2->setBoard(board);
-    }else if(type==3){
+    }*/else if(type==2){
         player2=new Math_Tic_Tac_Teo_random_player(2);
     }
 
@@ -295,5 +295,24 @@ void UI:: TicSize4(Player<string>*player1,Player<string>*player2,Board<string>*b
 
 // needs to be implemented //NO AI
 void UI:: Tic9x9(Player<char>*player1,Player<char>*player2,Board<char>*board,int type){
+    board=new Tic_Tac_Toe_9x9_board();
+    string name;cout<<"Enter your name ya first player : ";
+    cin>>name;
+    player1=new Tic_Tac_Toe_9x9_player(name,'X');
+    if(type==1){
+        cout<<"Enter your name ya second player : ";
+        cin>>name;
+        player2=new Tic_Tac_Toe_9x9_player(name,'O');
+    }/*else if(type==2){
+     player2=new AI_Player_Connect_Four('O');
+     // SET BOARD
+     player2->setBoard(board);
+   }*/else if(type==2){
+        player2=new Tic_Tac_Toe_9x9_random_player('O');
+    }
 
+
+    Player<char>* playerPtr[2]={player1,player2};
+    GameManager<char>manager(board, playerPtr);
+    manager.run();
 }
