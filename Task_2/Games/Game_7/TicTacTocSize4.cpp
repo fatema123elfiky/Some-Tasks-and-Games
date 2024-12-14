@@ -1,5 +1,6 @@
-#include "TIcTacTocSize4.h"
+#include "TicTacTocSize4.h"
 #include <algorithm>
+#include <utility>
 TicTacTocSize4Board::TicTacTocSize4Board(){
     this->rows = 4;
     this->columns = 4;
@@ -164,7 +165,9 @@ void TicTacTocSize4Player::getmove(int& x, int& y){
     }while(!this->boardPtr->update_board(x,y,this->symbol) || (placex == x && placey == y));
 }
 
-TicTacTocSize4RandomPlayer::TicTacTocSize4RandomPlayer(const string& symbol): RandomPlayer<string>(symbol){}
+TicTacTocSize4RandomPlayer::TicTacTocSize4RandomPlayer(string symbol): Player<string>(move(symbol)){
+    this->name = "Random Player :";
+}
 
 TicTacTocSize4RandomPlayer::~TicTacTocSize4RandomPlayer() =default;
 

@@ -15,7 +15,7 @@
 #include "Games/Game_4/word_tic.h"
 #include "Games/Game_5/Math_Tic_Tac_Teo.h"
 #include "Games/Game_6/MisereTicTacToc.h"
-#include "Games/Game_7/TIcTacTocSize4.h"
+#include "Games/Game_7/TicTacTocSize4.h"
 #include "Games/Game_8/New_tic_tac_toe_9x9.h"
 
 using namespace std;

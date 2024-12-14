@@ -23,4 +23,5 @@ add_executable(Task_2 main.cpp
         Games/Game_2/Four_in_a_row.h
         Games/Game_1/pyramic_Tic.h
         Games/Game_1/pyramic_Tic.cpp
+        Games/Game_7/TIcTacTocSize4.h
 )

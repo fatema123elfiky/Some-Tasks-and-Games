@@ -33,8 +33,9 @@ public:
 };
 
 
-class TicTacTocSize4RandomPlayer : public RandomPlayer<string>{
-    explicit TicTacTocSize4RandomPlayer(const string& symbol);
+class TicTacTocSize4RandomPlayer : public Player<string>{
+public:
+    explicit TicTacTocSize4RandomPlayer(string symbol);
     ~TicTacTocSize4RandomPlayer();
 
     void getmove(int& x, int& y) override;

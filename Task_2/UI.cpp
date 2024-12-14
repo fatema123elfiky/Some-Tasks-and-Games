@@ -251,6 +251,7 @@ void UI:: MathTic(Player<int>*player1,Player<int>*player2,Board<int>*board,int t
         cout<<"Enter your name ya second player : ";
         cin>>name;
         player2=new Math_Tic_Tac_Teo_player(name,2);
+
     }else if(type==2){
         player2=new Math_Tic_Tac_Teo_AI_player(2);
         // SET BOARD
@@ -272,13 +273,27 @@ void UI:: MathTic(Player<int>*player1,Player<int>*player2,Board<int>*board,int t
 
 
 // needs to be implemented //NO AI
-void UI:: TicSize4(Player<string>*player1,Player<string>*player2,Board<string>*board,int type)
-{
+void UI:: TicSize4(Player<string>*player1,Player<string>*player2,Board<string>*board,int type){
+    board = new TicTacTocSize4Board();
+    string name;cout<<"Enter your name ya first player : ";
+    cin>>name;
+    player1=new TicTacTocSize4Player(name,"X");
+    if(type==1){
+        cout<<"Enter your name ya second player : ";
+        cin>>name;
+        player2=new TicTacTocSize4Player(name,"O");
+    }
+    else if(type==2)
+        player2=new TicTacTocSize4RandomPlayer("O");
+
+
+    Player<string>* playerPtr[2]={player1,player2};
+    GameManager<string>manager(board, playerPtr);
+    manager.run();
 
 }
 
 // needs to be implemented //NO AI
-void UI:: Tic9x9(Player<char>*player1,Player<char>*player2,Board<char>*board,int type)
-{
+void UI:: Tic9x9(Player<char>*player1,Player<char>*player2,Board<char>*board,int type){
 
 }
