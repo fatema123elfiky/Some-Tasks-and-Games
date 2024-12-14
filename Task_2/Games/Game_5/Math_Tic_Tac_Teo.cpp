@@ -60,7 +60,7 @@ void Math_Tic_Tac_Teo_board::display_board()
         }
         cout<<'\n';
         for (int j = 0; j < columns ; ++j) {
-            cout<<"====";
+            cout<<"======";
         }
         cout<<'\n';
     }
@@ -177,7 +177,7 @@ void Math_Tic_Tac_Teo_player:: getmove(int& x, int& y)
 
     string num;
     cout<<"Enter the number : ";
-    cin>>num;
+    getline(cin,num);
     if(!Isdigit(num)){
         cout<<"Enter a valid number please !!\n\n";
         goto X;
@@ -192,8 +192,8 @@ void Math_Tic_Tac_Teo_player:: getmove(int& x, int& y)
 again:
     cout<<"Enter the position of the cell : ";
     string X,Y;
-    cout<<"Rows :";cin>>X;
-    cout<<"Columns : ";cin>>Y;
+    cout<<"Rows :";getline(cin,X);
+    cout<<"Columns : ";getline(cin,Y);
 
     while(!Isdigit(X)||!Isdigit(Y)){
         cout<<"Enter correct numbers please!!\n\n ";
