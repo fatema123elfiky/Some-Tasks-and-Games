@@ -6,24 +6,13 @@
 #include <fstream>
 #include<unordered_set>
 #include <limits>
-vector<string>check;
 
-void setvector(){
-
-    fstream file("dic.txt");
-    if (!file.is_open()){
-        cout<<"file can not be opened !!";
-    }
-    string line;
-    while(getline(file,line)){
-check.push_back(line);
-    }
-
-}
 template <typename T>
 class Word_Board:public Board<T> {
 public:
     Word_Board ();
+    vector<string>check;
+    void setvector(); 
     bool update_board (int x , int y , T symbol);
     void display_board () ;
     bool is_win() ;
@@ -31,7 +20,18 @@ public:
     bool game_is_over();
     ~Word_Board();
 };
+template<typename T>
+void Word_Board<T>::setvector() {
+        fstream file("dic.txt");
+        if (!file.is_open()){
+            cout<<"file can not be opened !!";
+        }
+        string line;
+        while(getline(file,line)){
+            check.push_back(line);
+        }
 
+    }
 template <typename T>
 class Word_Player: public Player<T>{
 public:
@@ -50,7 +50,7 @@ public:
 
 
 
-//--------------------------------------- IMPLEMENTATION
+//*IMPLEMENTATION*:-  ^_^
 
 #include <iostream>
 #include <iomanip>
@@ -58,7 +58,7 @@ public:
 
 using namespace std;
 
-// Constructor for X_O_Board
+// Constructor for Word_Board
 template <typename T>
 Word_Board<T>::Word_Board() {
     this->rows = this->columns = 3;
@@ -174,7 +174,7 @@ bool Word_Board<T>::game_is_over() {
 
 //--------------------------------------
 
-// Constructor for X_O_Player
+// Constructor for Word_Player
 template <typename T>
 Word_Player<T>::Word_Player(string name) : Player<T>(name, ' ') {}
 
@@ -217,7 +217,7 @@ cout<<"please enter your move x as integer \n"
 this->symbol=s[0];
 }
 
-// Constructor for X_O_Random_Player
+// Constructor for Word_Random_Player
 template <typename T>
 Word_Random_Player<T>::Word_Random_Player() : RandomPlayer<T>(' ') {
     this->dimension = 3;
