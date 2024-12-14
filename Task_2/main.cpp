@@ -12,8 +12,7 @@ int main() {
     while(on){
        on=UI::display_main_menu();
     }
-
-
+    cout << "Thanks for Playing! :)" << endl;
     return 0;
 }
 

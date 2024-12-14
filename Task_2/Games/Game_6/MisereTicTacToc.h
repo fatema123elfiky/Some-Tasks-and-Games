@@ -33,16 +33,16 @@ public:
     void getmove(int& x, int& y) override;
 };
 
-class MisereTicTacTocRandomPlayer final : public RandomPlayer<string> {
+class MisereTicTacTocRandomPlayer final : public Player<string> {
 public:
-    explicit MisereTicTacTocRandomPlayer(const string& symbol): RandomPlayer<string>(symbol){}
+    explicit MisereTicTacTocRandomPlayer(const string& symbol, string name);
 
     void getmove(int& x, int& y) override;
 };
 
 class MisereTicTacTacAIPlayer final : public Player<string>{
 public:
-    explicit MisereTicTacTacAIPlayer(const string& symbol);
+    MisereTicTacTacAIPlayer(const string& symbol,  string name);
     ~MisereTicTacTacAIPlayer() ;
     void getmove(int& x, int& y) override;
 

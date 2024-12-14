@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <limits>
+#include <utility>
 
 MisereTicTacToc::MisereTicTacToc(){
     this->rows = this->columns = 3;
@@ -93,15 +94,15 @@ void MisereTicTacTocPlayer::getmove(int& x, int& y){
     y = stoi(tempy) - 1;
 }
 
+MisereTicTacTocRandomPlayer::MisereTicTacTocRandomPlayer(const string& symbol, string name) : Player<string>(move(name),symbol){}
+
 void MisereTicTacTocRandomPlayer::getmove(int& x, int& y){
     x = rand() % 3;
     y = rand() % 3;
 
 }
 
-MisereTicTacTacAIPlayer::MisereTicTacTacAIPlayer(const string& symbol) : Player(symbol){
-    this->name = "AI Player";
-}
+MisereTicTacTacAIPlayer::MisereTicTacTacAIPlayer(const string& symbol,  string name) : Player(move(name),symbol ){}
 
 MisereTicTacTacAIPlayer::~MisereTicTacTacAIPlayer() = default;
 
