@@ -114,7 +114,7 @@ void MisereTicTacTacAIPlayer::getmove(int& x, int& y){
 
 int MisereTicTacTacAIPlayer::calculateMinMax(string s, bool isMaximizing){
     if (this->boardPtr->is_win())
-        return isMaximizing ? -1 : 1;
+        return isMaximizing ? 1 : -1;
 
     if (this->boardPtr->is_draw())
         return 0;

@@ -6,11 +6,11 @@
 
 class TicTacTocSize4Board : public Board<string> {
 private:
-    int primaryX, primaryY;
+    int primaryX = 0, primaryY = 0;
 public:
     TicTacTocSize4Board();
 
-    ~TicTacTocSize4Board() ;
+    ~TicTacTocSize4Board();
 
     bool update_board(int x, int y, string symbol) override;
 
@@ -26,18 +26,20 @@ public:
 
 class TicTacTocSize4Player : public Player<string>{
 public:
-    TicTacTocSize4Player(const string& n, const string& symbol) : Player<string>(n, symbol) {}
-    ~TicTacTocSize4Player() ;
+    TicTacTocSize4Player(const string& n, const string& symbol);
+    ~TicTacTocSize4Player();
 
     void getmove(int& x, int& y) override;
 };
 
 
 class TicTacTocSize4RandomPlayer : public RandomPlayer<string>{
-    explicit TicTacTocSize4RandomPlayer(const string& symbol) : RandomPlayer<string>(symbol) {}
+    explicit TicTacTocSize4RandomPlayer(const string& symbol);
+    ~TicTacTocSize4RandomPlayer();
 
     void getmove(int& x, int& y) override;
 };
+
 
 
 

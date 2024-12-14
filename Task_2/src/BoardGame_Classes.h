@@ -13,8 +13,6 @@ protected:
     int n_moves = 0;
 
 public:
-    virtual ~Board() = default;
-
 
     /// Return true if move is valid and put it on the board
     /// within board boundaries in an empty cell
@@ -41,7 +39,6 @@ protected:
     T symbol;
     Board<T>* boardPtr;  // Pointer to the board
 public:
-    virtual ~Player() = default;
     /// Two constructors to initiate players
     /// Give the player a symbol to use in playing
     /// It can be X, O, or others

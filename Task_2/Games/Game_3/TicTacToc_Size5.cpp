@@ -51,19 +51,23 @@ bool TicTacToc_Size5::is_win(){
 
     map<string,int> players;
 
-    for(int i = 0 ; i < this->columns-2 ; i++){
-        for(int j = 0 ; j < this->rows-2 ; j++){
-            if(this->board[i][j] == this->board[i+1][j] && this->board[i+2][j] == this->board[i][j])
-                players[this->board[i][j]]++;
+    for (int i = 0; i < this->rows; i++) {
+        for (int j = 0; j < this->columns; j++) {
+            if (this->board[i][j] != "-") {
+                if (i + 2 < this->rows && this->board[i][j] == this->board[i+1][j] && this->board[i][j] == this->board[i+2][j])
+                    players[this->board[i][j]]++;
 
-            if(this->board[i][j] == this->board[i][j+1] && this->board[i][j+2] == this->board[i][j])
-                players[this->board[i][j]]++;
+                if (j + 2 < this->columns && this->board[i][j] == this->board[i][j+1] && this->board[i][j] == this->board[i][j+2])
+                    players[this->board[i][j]]++;
 
-            if(this->board[i][j] == this->board[i+1][j+1] && this->board[i+2][j+2] == this->board[i][j])
-                players[this->board[i][j]]++;
+                if (i + 2 < this->rows && j + 2 < this->columns && this->board[i][j] == this->board[i+1][j+1] && this->board[i][j] == this->board[i+2][j+2])
+                    players[this->board[i][j]]++;
+
+                if (i + 2 < this->rows && j - 2 >= 0 && this->board[i][j] == this->board[i+1][j-1] && this->board[i][j] == this->board[i+2][j-2])
+                    players[this->board[i][j]]++;
+            }
         }
     }
-
     auto firstplayer = players.begin();
     auto lastplayer = players.end();
     --lastplayer;

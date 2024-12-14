@@ -4,7 +4,7 @@
 
 #include "Math_Tic_Tac_Teo.h"
 
-bool Isdigit(string s){
+inline bool Is_digit(string s){
     for(auto c :s){
         if(!isdigit(c))
             return false;
@@ -178,7 +178,7 @@ void Math_Tic_Tac_Teo_player:: getmove(int& x, int& y)
     string num;
     cout<<"Enter the number : ";
     cin>>num;
-    if(!Isdigit(num)){
+    if(!Is_digit(num)){
         cout<<"Enter a valid number please !!\n\n";
         goto X;
     }
@@ -195,7 +195,7 @@ again:
     cout<<"Rows :";cin>>X;
     cout<<"Columns : ";cin>>Y;
 
-    while(!Isdigit(X)||!Isdigit(Y)){
+    while(!Is_digit(X)||!Is_digit(Y)){
         cout<<"Enter correct numbers please!!\n\n ";
         goto again;
     }
