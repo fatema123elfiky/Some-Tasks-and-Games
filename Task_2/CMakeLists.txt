@@ -11,15 +11,11 @@ add_executable(Task_2 main.cpp
         Games/Game_3/TicTacToc_Size5.cpp
         Games/Game_6/MisereTicTacToc.h
         Games/Game_6/MisereTicTacToc.cpp
-        Games/Game_8/Tic_Tac_Toe_9x9.h
-        Games/Game_8/Tic_Tac_Toe_9x9.cpp
         Games/Game_8/Tic_Tac_Toe_3x3.cpp
         Games/Game_7/TIcTacTocSize4.h
         Games/Game_7/TIcTacTocSize4.cpp
         UI.cpp
         UI.h
-        Games/Game_8/Tic_Tactoe_9x9.cpp
-        Games/Game_8/Tic_Tac_Toe_9x9.h
         Games/Game_5/Math_Tic_Tac_Teo.h
         Games/Game_4/word_tic.h
         Games/Game_4/word_tic.cpp

@@ -6,9 +6,9 @@
 #include <fstream>
 #include<unordered_set>
 #include <limits>
-vector<string>check;
+inline vector<string>check;
 
-void setvector(){
+inline void setvector(){
 
     fstream file("dic.txt");
     if (!file.is_open()){

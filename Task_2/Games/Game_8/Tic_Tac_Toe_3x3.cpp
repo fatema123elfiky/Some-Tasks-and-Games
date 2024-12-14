@@ -5,7 +5,7 @@
 #include "Tic_Tac_Toe_3x3.h"
 
 
-bool IsDigit(string s){
+inline bool IsDigit(string s){
     for(auto c :s){
         if(!isdigit(c))
             return false;

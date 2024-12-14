@@ -4,7 +4,7 @@
 
 #include "Four_in_a_row.h"
 
-bool IsDigit(string s){
+inline bool IsDigit(string s){
     for(auto c :s){
         if(!isdigit(c))
             return false;

@@ -6,8 +6,8 @@
 #include "../../src/BoardGame_Classes.h"
 //Directions of neighbours
           // R    L     D    U     RD   LD
-int X[6] = {  0 ,   0 , +1 , -1 ,  +1 ,  -1 };
-int Y[6] = { +1 ,  -1 ,  0 ,  0 ,  +1 ,  -1 };
+inline int X[6] = {  0 ,   0 , +1 , -1 ,  +1 ,  -1 };
+inline int Y[6] = { +1 ,  -1 ,  0 ,  0 ,  +1 ,  -1 };
 template <typename T>
 class Pyramic_Board:public Board<T> {
 public:
