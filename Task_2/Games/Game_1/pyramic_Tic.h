@@ -17,7 +17,7 @@ public:
     bool is_win() ;
     bool is_draw();
     bool game_is_over();
-
+    ~Pyramic_Board();
 };
 
 template <typename T>
@@ -66,7 +66,13 @@ Pyramic_Board<T>::Pyramic_Board() {
     }
     this->n_moves = 0;
 }
-
+template <typename T>
+Pyramic_Board<T>::~Pyramic_Board() {
+    for (int i = 0; i < this->rows; ++i) {
+        delete [] this->board[i];
+    }
+    delete [] this->board;
+}
 template <typename T>
 bool Pyramic_Board<T>::update_board(int x, int y, T mark) {
     // Only update if move is valid
