@@ -113,7 +113,7 @@ bool Connect_Board:: is_win()
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < columns; ++j) {
 
-          /*  if(board[i][j]=='.')
+            if(board[i][j]=='.')
                 continue;
 
 
@@ -174,92 +174,8 @@ bool Connect_Board:: is_win()
             }
 
 
-        }*/
-            bool win=false;
-            if(j-1>=0&&j-2>=0&&j-3>=0){//back horizontal
-                for (int k = 1; k <=3 ; ++k) {
-                    if(board[i][j]!=board[i][j-k]) {
-                        win= false;
-                        break;
-                    }else if(board[i][j]==board[i][j-k]&&board[i][j]!='.') {
-                        win = true;
-                    }
-                }
-            }
-            if(j+1<columns && j+2<columns && j+3<columns){//front horizontal
-                for (int k = 1; k <=3 ; ++k) {
-                    if(board[i][j]!=board[i][j+k])
-                    {
-                        win= false;
-                        break;
-                    }else if(board[i][j]==board[i][j+k]&&board[i][j]!='.')
-                        win=true;
-                }
-            }
-            if(i-1>=0&&i-2>=0&&i-3>=0){//back vertical
-                for (int k = 1; k <=3 ; ++k) {
-                    if(board[i][j]!=board[i-k][j])
-                    {
-                        win= false;
-                        break;
-                    }else if(board[i][j]==board[i-k][j]&&board[i][j]!='.')
-                        win=true;
-                }
-            }
-            if(i+1<rows&&i+2<rows&&i+3<rows){//front vertical
-                for (int k = 1; k <=3 ; ++k) {
-                    if(board[i][j]!=board[i+k][j])
-                    {
-                        win= false;
-                        break;
-                    }else if(board[i][j]==board[i+k][j]&&board[i][j]!='.')
-                        win=true;
-                }
-            }
-            if(i-1>=0&&j-1>=0&&i-2>=0&&j-2>=0&&i-3>=0&&j-3>=0){//back off diagonal
-                for (int k = 1; k <=3 ; ++k) {
-                    if(board[i][j]!=board[i-k][j-k])
-                    {
-                        win= false;
-                        break;
-                    }else if(board[i][j]==board[i-k][j-k]&&board[i][j]!='.')
-                        win=true;
-                }
-            }
-            if(i+1<rows&&j+1<columns&&i+2<rows&&j+2<columns&&i+3<rows&&j+3<columns){//front off diagonal
-                for (int k = 0; k <=3 ; ++k) {
-                    if(board[i][j]!=board[i+k][j+k])
-                    {
-                        win= false;
-                        break;
-                    }else if(board[i][j]!='.'&&board[i][j]==board[i+k][j+k])
-                        win=true;
-                }
-            }
-            if(i+1<rows&&j-1>=0&&i+2<rows&&j-2>=0&&i+3<rows&&j-3>=0){// back main diagonal
-                for (int k = 0; k <=3 ; ++k) {
-                    if(board[i][j]!=board[i+k][j-k])
-                    {
-                        win= false;
-                        break;
-                    }else if(board[i][j]==board[i+k][j-k]&&board[i][j]!='.')
-                        win=true;
-                }
-            }
-            if(i-1>=0&&j+1<columns&&i-2>=0&&j+2<columns&&i-3>=0&&j+3<columns){//ba
-                for (int k = 0; k <=3 ; ++k) {
-                    if(board[i][j]!=board[i-k][j+k])
-                    {
-                        win= false;
-                        break;
-                    }else if(board[i][j]==board[i-k][j+k]&&board[i][j]!='.')
-                        win=true;
-                }
-            }
-
-            if(win)
-                return true;
         }
+
     }
     return false;
 }
