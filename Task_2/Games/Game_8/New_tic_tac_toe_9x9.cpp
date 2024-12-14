@@ -4,6 +4,17 @@
 
 #include "New_tic_tac_toe_9x9.h"
 
+bool Isdigit(string s){
+    for(auto c :s){
+        if(!isdigit(c))
+            return false;
+    }
+    return true;
+}
+
+
+//CLASS BOARD
+
 Tic_Tac_Toe_9x9_board::Tic_Tac_Toe_9x9_board() {
 
     boards = new X_O_Board *[3];
@@ -139,6 +150,48 @@ bool Tic_Tac_Toe_9x9_board:: is_win()
 }
 
 
+//CLASS PLAYER
+
+Tic_Tac_Toe_9x9_player::Tic_Tac_Toe_9x9_player(string n, char c) : Player<char>(n,c){}
+
+void Tic_Tac_Toe_9x9_player:: getmove(int& x, int& y)
+{
+    string X,Y;
+
+    again:
+    cout<<"Enter the row : ";
+    cin>>X;
+    if(!Isdigit(X)){
+        cout<<"Enter a correct number !!\n\n";
+        goto again;
+    }
+
+    again_2:
+
+    cout<<"Enter the column : ";
+    cin>>Y;
+
+    if(!Isdigit(Y)){
+        cout<<"Enter a correct number !!\n\n";
+        goto again_2;
+    }
+    x=stoi(X);
+    y=stoi(Y);
+}
+
+//CLASS RANDOM PLAYER
+Tic_Tac_Toe_9x9_random_player::Tic_Tac_Toe_9x9_random_player(char c): RandomPlayer<char>(c)
+{
+    this->dimension=9;
+    this->name="Random Computer Player";
+    srand(static_cast<int>(time(0)));
+}
+
+void Tic_Tac_Toe_9x9_random_player:: getmove(int& x, int& y)
+{
+    x=rand()%this->dimension;
+    y=rand()%this->dimension;
+}
 
 
 

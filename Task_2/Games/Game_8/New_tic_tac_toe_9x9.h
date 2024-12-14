@@ -28,10 +28,16 @@ public:
 
 class Tic_Tac_Toe_9x9_player:Player<char> {
 
+public:
+    Tic_Tac_Toe_9x9_player(string n, char c);
+    void getmove(int& x, int& y);
+
 };
 
 class Tic_Tac_Toe_9x9_random_player :RandomPlayer<char>{
-
+public:
+    Tic_Tac_Toe_9x9_random_player(char c);
+    void getmove(int& x, int& y);
 };
 
 
