@@ -1,6 +1,4 @@
-//
-// Created by Fatma on 12/12/2024.
-//
+
 // THE NEW ONE TO BE USED
 #include "Tic_Tac_Toe_9x9.h"
 

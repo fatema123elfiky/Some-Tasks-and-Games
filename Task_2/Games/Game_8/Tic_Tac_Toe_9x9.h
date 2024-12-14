@@ -1,6 +1,3 @@
-//
-// Created by Fatma on 12/12/2024.
-//
 
 #ifndef GAMES_TIC_TAC_TOE_9X9_H
 #define GAMES_TIC_TAC_TOE_9X9_H

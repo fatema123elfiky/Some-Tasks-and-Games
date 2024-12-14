@@ -1,6 +1,4 @@
-//
-// Created by Fatma on 12/13/2024.
-//
+
 
 #include "UI.h"
 string UI::check_menu(const string& menuText , vector<string>choices){

@@ -1,6 +1,3 @@
-//
-// Created by Fatma on 12/13/2024.
-//
 
 #ifndef GAMES_UI_H
 #define GAMES_UI_H
@@ -24,15 +21,25 @@ using namespace std;
 class UI {
 public:
     static string check_menu(const string& menuText , vector<string>choices);
+
     static int display_main_menu();
+
     static int display_menu_players(string choice);
+
     static void Connect_4(Player<char>*player1,Player<char>*player2,Board<char>*board,int type);
+
     static void Pyramic(Player<char>*player1,Player<char>*player2,Board<char>*board,int type);
+
     static void TicSize5(Player<string>*player1,Player<string>*player2,Board<string>*board,int type);
+
     static void wordTic(Player<char>*player1,Player<char>*player2,Board<char>*board,int type);
+
     static void MathTic(Player<int>*player1,Player<int>*player2,Board<int>*board,int type);
+
     static void Misere(Player<string>*player1,Player<string>*player2,Board<string>*board,int type);
+
     static void TicSize4(Player<string>*player1,Player<string>*player2,Board<string>*board,int type);
+
     static void Tic9x9(Player<char>*player1,Player<char>*player2,Board<char>*board,int type);
 
 };
