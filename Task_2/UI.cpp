@@ -21,6 +21,8 @@ string UI::check_menu(const string& menuText , vector<string>choices){
 
 int UI::display_main_menu()
 {
+
+
     // we will separate according to that criteria then according the single issues
     vector<string>choices{"1","2","3","4","5","6","7","8","9"};
     string  main_menu= "1.Pyramic_Tic\n2.Four_in_a_row\n3.Tic Tac Toc size 5\n4.Word Tic\n5.Math Tic Tac Toe\n6.Misere Tic Tac Teo\n7.Tic Tac Toc size 4\n8.Tic Tac Teo 9x9\n9.Exit";
