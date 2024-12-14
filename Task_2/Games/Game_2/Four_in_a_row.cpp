@@ -57,7 +57,7 @@ void Connect_Board::display_board()
         }
         cout<<'\n';
         for (int j = 0; j < columns ; ++j) {
-            cout<<"====";
+            cout<<"=====";
         }
         cout<<'\n';
     }
@@ -213,10 +213,10 @@ void Connect_Player:: getmove(int& x, int& y){
     x=5;
     cout<<"Please Enter the Column number : ";
     string Y;
-    cin>>Y;
+    getline(cin,Y);
     while(!IsDigit(Y)){
         cout<<"Please Enter a correct number: ";
-        cin>>Y;
+        getline(cin,Y);
     }
     y=stoi(Y);
 
