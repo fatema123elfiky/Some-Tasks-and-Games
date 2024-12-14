@@ -67,7 +67,7 @@ bool Tic_Tac_Toe_9x9_board::is_draw() {
 
 void Tic_Tac_Toe_9x9_board::display_board()
 {
-    cout<<"##### The representative board ##### \n\n";
+    cout<<"\n\n##### The representative board ##### \n\n";
     cout<<"  ";
     for (int i = 0; i < columns; ++i) {
         cout<<i<<"    ";
@@ -80,7 +80,7 @@ void Tic_Tac_Toe_9x9_board::display_board()
         }
         cout<<'\n';
         for (int j = 0; j < columns ; ++j) {
-            cout<<"====";
+            cout<<"=======";
         }
         cout<<'\n';
     }
@@ -175,7 +175,7 @@ void Tic_Tac_Toe_9x9_player:: getmove(int& x, int& y)
 
     again:
     cout<<"Enter the row : ";
-    cin>>X;
+    getline(cin,X);
     if(!Isdigit(X)){
         cout<<"Enter a correct number !!\n\n";
         goto again;
@@ -184,7 +184,7 @@ void Tic_Tac_Toe_9x9_player:: getmove(int& x, int& y)
     again_2:
 
     cout<<"Enter the column : ";
-    cin>>Y;
+    getline(cin,Y);
 
     if(!Isdigit(Y)){
         cout<<"Enter a correct number !!\n\n";
