@@ -93,23 +93,36 @@ int UI:: display_menu_players(string choice)
     vector<string>choices_1={"1","2","3","4"};
     vector<string>choices_2={"1","2","3"};
     string menu;vector<string>choices;
+    bool flag;
     if( choice=="6"){
         menu=menu_1;
         choices=choices_1;
+        flag=true;
     }else{
         menu=menu_2;
         choices=choices_2;
+        flag= false;
     }
     string Choice=check_menu(menu,choices);
 
-    if(Choice=="4")
-        return 0;
-    else if(Choice=="1"){
-        return 1;
-    }else if(Choice=="2"){
-        return 2;
-    }else /*if(Choice=="3")*/{
-        return 3;
+    if(flag){
+        if (Choice == "4")
+            return 0;
+        else if (Choice == "1") {
+            return 1;
+        } else if (Choice == "2") {
+            return 2;
+        } else if (Choice == "3") {
+            return 3;
+        }
+    }else{
+        if (Choice == "3")
+            return 0;
+        else if (Choice == "1") {
+            return 1;
+        } else if (Choice == "2") {
+            return 2;
+        }
     }
 };
 
@@ -118,11 +131,11 @@ void UI:: Connect_4(Player<char>*player1,Player<char>*player2,Board<char>*board,
 
    board=new Connect_Board();
    string name;cout<<"Enter your name ya first player : ";
-   cin>>name;
+   getline(cin,name,'\n');
    player1=new Connect_Player(name,'X');
    if(type==1){
        cout<<"Enter your name ya second player : ";
-       cin>>name;
+       getline(cin,name,'\n');
        player2=new Connect_Player(name,'O');
    }/*else if(type==2){
      player2=new AI_Player_Connect_Four('O');
@@ -145,13 +158,13 @@ void UI:: Pyramic(Player<char>*player1,Player<char>*player2,Board<char>*board,in
 
     board= new Pyramic_Board<char>();
     string name;cout<<"Enter your name ya first player : ";
-    cin>>name;
+    getline(cin,name,'\n');
     player1=new Pyramic_Player (name,'X');
 
     if(type==1){
 
         cout<<"Enter your name ya second player : ";
-        cin>>name;
+        getline(cin,name,'\n');
         player2=new Pyramic_Player<char> (name,'O');
 
     }/*else if(type==2){
@@ -172,11 +185,11 @@ void UI::wordTic(Player<char> *player1, Player<char> *player2, Board<char> *boar
 {
     board=new Word_Board<char> ();
     string name;cout<<"Enter your name ya first player : ";
-    cin>>name;
+    getline(cin,name,'\n');
     player1=new Word_Player<char>(name);
     if(type==1){
         cout<<"Enter your name ya second player : ";
-        cin>>name;
+        getline(cin,name,'\n');
         player2=new Word_Player<char>(name);
     }/*else if(type==2){
         //AI PLAYER
@@ -198,14 +211,14 @@ void UI:: Misere(Player<string>*player1,Player<string>*player2,Board<string>*boa
     board=new MisereTicTacToc();
     string name1, name2;
     cout<<"Enter your name ya first player : ";
-    cin>>name1;
+    getline(cin,name1,'\n');
     if(type==1){
         player2 = new MisereTicTacTacAIPlayer("O", name1);
         player2->setBoard(board);
         name2 = "AI Player";
     }else if(type==2){
         cout<<"Enter your name ya second player : ";
-        cin>>name2;
+        getline(cin,name2,'\n');
         player2=new MisereTicTacTocPlayer(name1,"O");
     }else if(type==3){
         player2=new MisereTicTacTocRandomPlayer(name1,"O");
@@ -224,11 +237,11 @@ void UI:: TicSize5(Player<string>*player1,Player<string>*player2,Board<string>*b
 
     board=new TicTacToc_Size5();
     string name;cout<<"Enter your name ya first player : ";
-    cin>>name;
+    getline(cin,name,'\n');
     player1=new TicTacTocPlayer(name,"X");
     if(type==1){
         cout<<"Enter your name ya second player : ";
-        cin>>name;
+        getline(cin,name,'\n');
         player2=new TicTacTocPlayer(name,"O");
     }
     else if(type==2)
@@ -245,11 +258,11 @@ void UI:: MathTic(Player<int>*player1,Player<int>*player2,Board<int>*board,int t
 {
     board=new Math_Tic_Tac_Teo_board();
     string name;cout<<"Enter your name ya first player : ";
-    cin>>name;
+    getline(cin,name,'\n');
     player1=new Math_Tic_Tac_Teo_player(name,1);
     if(type==1){
         cout<<"Enter your name ya second player : ";
-        cin>>name;
+        getline(cin,name,'\n');
         player2=new Math_Tic_Tac_Teo_player(name,2);
 
     }/*else if(type==2){
@@ -264,30 +277,30 @@ void UI:: MathTic(Player<int>*player1,Player<int>*player2,Board<int>*board,int t
     Player<int>* playerPtr[2]={player1,player2};
     GameManager<int>manager(board, playerPtr);
     manager.run();
+
+
+
 }
+
+
+
 
 // needs to be implemented //NO AI
 void UI:: TicSize4(Player<string>*player1,Player<string>*player2,Board<string>*board,int type){
     board = new TicTacTocSize4Board();
     string name;cout<<"Enter your name ya first player : ";
-    cin>>name;
+    getline(cin,name,'\n');
     player1=new TicTacTocSize4Player(name,"X");
-
     if(type==1){
         cout<<"Enter your name ya second player : ";
-        cin>>name;
+        getline(cin,name,'\n');
         player2=new TicTacTocSize4Player(name,"O");
     }
     else if(type==2)
         player2=new TicTacTocSize4RandomPlayer("O");
 
 
-
     Player<string>* playerPtr[2]={player1,player2};
-
-    for(auto i : playerPtr)
-        i->setBoard(board);
-
     GameManager<string>manager(board, playerPtr);
     manager.run();
 
@@ -297,11 +310,11 @@ void UI:: TicSize4(Player<string>*player1,Player<string>*player2,Board<string>*b
 void UI:: Tic9x9(Player<char>*player1,Player<char>*player2,Board<char>*board,int type){
     board=new Tic_Tac_Toe_9x9_board();
     string name;cout<<"Enter your name ya first player : ";
-    cin>>name;
+    getline(cin,name,'\n');
     player1=new Tic_Tac_Toe_9x9_player(name,'X');
     if(type==1){
         cout<<"Enter your name ya second player : ";
-        cin>>name;
+        getline(cin,name,'\n');
         player2=new Tic_Tac_Toe_9x9_player(name,'O');
     }/*else if(type==2){
      player2=new AI_Player_Connect_Four('O');
