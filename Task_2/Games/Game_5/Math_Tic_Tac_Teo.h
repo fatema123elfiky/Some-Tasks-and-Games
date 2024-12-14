@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <utility>
 
+inline bool Isdigit(string s);
 
 class Math_Tic_Tac_Teo_board: public Board<int>
 {

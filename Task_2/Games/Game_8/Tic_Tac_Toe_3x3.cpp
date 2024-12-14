@@ -79,14 +79,7 @@ void X_O_Board::display_board() {
 void X_O_Board::display_row(const X_O_Board &board1,const X_O_Board &board2,const X_O_Board &board3,int k)
 {
 
-    cout<<"  ";
-    for (int i = 0; i < 9; ++i) {
-        cout<<i<<"    ";
-        if(i!=0&&i%3==0){
-            cout<<"  ";
-        }
-    }
-    cout<<"\n\n";
+
     for (int i = 0; i < 3 ; ++i) {
         cout << i+k << "  ";
 
@@ -145,6 +138,14 @@ bool X_O_Board::game_is_over() {
     return is_win() || is_draw();
 }
 
+void X_O_Board::setter()
+{
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            board[i][j]='.';
+        }
+    }
+}
 
 
 // Constructor for X_O_Player

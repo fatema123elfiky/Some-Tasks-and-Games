@@ -7,7 +7,7 @@
 #include "../../src/BoardGame_Classes.h"
 #include <vector>
 
-
+inline bool IsDigit(string s);
 class Connect_Board:public Board<char>{
 
 public:

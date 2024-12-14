@@ -9,11 +9,13 @@
 #include "Tic_Tac_Toe_3x3.h"
 #include "../../src/BoardGame_Classes.h"
 
+inline bool Isdigit(string s);
 
-class Tic_Tac_Toe_9x9_board :Board<char>{
+class Tic_Tac_Toe_9x9_board : public Board<char>{
 
 private :
     X_O_Board **boards;
+    vector<int>Valid_places;
 public:
     Tic_Tac_Toe_9x9_board();
     ~Tic_Tac_Toe_9x9_board();
@@ -26,7 +28,7 @@ public:
 
 };
 
-class Tic_Tac_Toe_9x9_player:Player<char> {
+class Tic_Tac_Toe_9x9_player:public Player<char> {
 
 public:
     Tic_Tac_Toe_9x9_player(string n, char c);
@@ -34,7 +36,7 @@ public:
 
 };
 
-class Tic_Tac_Toe_9x9_random_player :RandomPlayer<char>{
+class Tic_Tac_Toe_9x9_random_player :public RandomPlayer<char>{
 public:
     Tic_Tac_Toe_9x9_random_player(char c);
     void getmove(int& x, int& y);

@@ -17,13 +17,20 @@ bool Isdigit(string s){
 
 Tic_Tac_Toe_9x9_board::Tic_Tac_Toe_9x9_board() {
 
+
+    this->n_moves=0;
+    this->rows=this->columns=3;
+
     boards = new X_O_Board *[3];
     for (int i = 0; i < rows; ++i) {
         boards[i]=new X_O_Board [3];
     }
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            boards[i][j].setter();
+        }
+    }
 
-    this->n_moves=0;
-    this->rows=this->columns=3;
     board=new char* [rows];
     for (int i = 0; i < rows; ++i) {
         board[i]=new char [columns];
@@ -84,21 +91,26 @@ void Tic_Tac_Toe_9x9_board::display_board()
     for (int j = 0; j < 9; ++j) {
         cout << "======";
     }
+    cout<<"\n";
+    cout<<"  ";
+    for (int i = 0; i < 9; ++i) {
+        if(i!=0&&i%3==0){
+            cout<<"   ";
+        }
+        cout<<i<<"    ";
+    }
+    cout<<"\n\n";
     for (int i = 0; i < 3; ++i) {
 
 
         boards[i][0].display_row(boards[i][0],boards[i][1],boards[i][2],i*3) ;
 
 
-        cout << "\n\n";
+
         for (int j = 0; j < 9; ++j) {
             cout << "======";
         }
-        cout<<'\n';
-        for (int j = 0; j < 9; ++j) {
-            cout << "======";
-        }
-        cout << "\n\n";
+        cout << "\n";
 
     }
 }
@@ -111,17 +123,20 @@ bool Tic_Tac_Toe_9x9_board::update_board(int x, int y, char symbol){
         cout<<"Out of bounderies \n\n";
         return false;
     }
-
-    if (!boards[x%3][y%3].update_board(x/3,y/3,symbol))
+    if(boards[x/3][y/3].is_win())
+    {
+        return false;
+    }
+    if (!boards[x/3][y/3].update_board(x-3*(x/3),y-3*(y/3),symbol))
     {
         cout<<"Try again !!\n\n";
         return false;
     }
 
     n_moves++;
-    if(boards[x%3][y%3].is_win())
+    if(boards[x/3][y/3].is_win())
     {
-        board[x%3][y%3]=symbol;
+        board[x/3][y/3]=symbol;
     }
     // case of draw how in the small board as it is possible or we will leave it ?
 

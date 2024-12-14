@@ -13,6 +13,8 @@
 using namespace std;
 
 class X_O_Board:public Board<char> {
+
+
 public:
     X_O_Board ();
     bool update_board (int x , int y , char symbol);
@@ -23,6 +25,7 @@ public:
     bool is_draw();
     bool game_is_over();
     ~X_O_Board();
+    void setter();
 
 };
 

@@ -4,7 +4,7 @@
 
 #include "Math_Tic_Tac_Teo.h"
 
-inline bool Is_digit(string s){
+bool Isdigit(string s){
     for(auto c :s){
         if(!isdigit(c))
             return false;
@@ -52,7 +52,7 @@ void Math_Tic_Tac_Teo_board::display_board()
     for (int i = 0; i < columns; ++i) {
         cout<<i<<"    ";
     }
-    cout<<"\n\n";
+    cout<<"\n";
     for (int i = 0; i < rows; ++i){
         cout<<i<<"  ";
         for (int j = 0; j < columns; ++j) {
@@ -81,10 +81,10 @@ bool Math_Tic_Tac_Teo_board::update_board(int x, int y, int symbol)
     }
 
 
-    if(/*symbol!=0&&*/(x>=rows||x<0||y>=columns||y<0)&&!Valid_Number[symbol]){
+    /*if(*//*symbol!=0&&*//*(x>=rows||x<0||y>=columns||y<0)&&!Valid_Number[symbol]){
        cout<<"Try again !!\n\n";
        return false;
-    }
+    }*/
 
     if(x>=rows||x<0||y>=columns||y<0) {
        cout<<"Out of Bounderies !! \n";
@@ -178,7 +178,7 @@ void Math_Tic_Tac_Teo_player:: getmove(int& x, int& y)
     string num;
     cout<<"Enter the number : ";
     cin>>num;
-    if(!Is_digit(num)){
+    if(!Isdigit(num)){
         cout<<"Enter a valid number please !!\n\n";
         goto X;
     }
@@ -195,7 +195,7 @@ again:
     cout<<"Rows :";cin>>X;
     cout<<"Columns : ";cin>>Y;
 
-    while(!Is_digit(X)||!Is_digit(Y)){
+    while(!Isdigit(X)||!Isdigit(Y)){
         cout<<"Enter correct numbers please!!\n\n ";
         goto again;
     }
@@ -301,18 +301,11 @@ int Math_Tic_Tac_Teo_AI_player::backtrack(int& x,int & y,int& symbol,int c, bool
 
 
     //opponent
-    vector<int>player;
-    if(c==1){
-        for (int i = 1; i <=9 ; ++i) {
-            if(i%2!=0)
-                player.push_back(i);
-        }
-    }else{
-        for (int i = 1; i <=9 ; ++i) {
-            if(i%2==0)
-                player.push_back(i);
-        }
-    }
+    static vector<int>player_odd{1,3,5,7,9};
+    static vector<int>player_even{2,4,6,8};
+    vector<int>& player = (c == 1) ?player_odd :player_even;
+
+
 
     int bestvalue;
     if(isMaximizing)
@@ -320,7 +313,7 @@ int Math_Tic_Tac_Teo_AI_player::backtrack(int& x,int & y,int& symbol,int c, bool
     else
         bestvalue=INT_MAX;
 
-    int Symbol,X,Y;
+    int Symbol=-1,X=-1,Y=-1;
 
 
     for (int i = 0; i < 3; ++i) {
