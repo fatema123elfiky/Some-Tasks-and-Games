@@ -1,4 +1,6 @@
-
+//
+// Created by Fatma on 12/13/2024.
+//
 
 #include "UI.h"
 string UI::check_menu(const string& menuText , vector<string>choices){
@@ -104,7 +106,7 @@ int UI:: display_menu_players(string choice)
         return 1;
     }else if(Choice=="2"){
         return 2;
-    }else if(Choice=="3"){
+    }else /*if(Choice=="3")*/{
         return 3;
     }
 };
