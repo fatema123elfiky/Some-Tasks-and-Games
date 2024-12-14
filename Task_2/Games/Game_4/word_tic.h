@@ -27,12 +27,9 @@ public:
     bool update_board (int x , int y , T symbol);
     void display_board () ;
     bool is_win() ;
-    pair<int,int> IsAbout2Win();
-    pair<int,int> Isdanger();
-
     bool is_draw();
     bool game_is_over();
-
+    ~Word_Board();
 };
 
 template <typename T>
@@ -77,6 +74,13 @@ Word_Board<T>::Word_Board() {
         setvector();
     }
 
+}
+template<typename T>
+Word_Board<T>::~Word_Board() {
+    for (int i = 0; i < this->rows; ++i) {
+        delete [] this->board[i];
+    }
+    delete [] this->board;
 }
 
 template <typename T>
