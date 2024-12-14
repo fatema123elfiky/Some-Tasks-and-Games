@@ -2,7 +2,7 @@
 #include <limits>
 
 #include "pyramic_Tic.h"
-#include "Pyramic_Ai.h"
+//#include "Pyramic_Ai.h"
 
 using namespace std;
 

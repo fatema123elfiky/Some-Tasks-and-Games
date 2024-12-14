@@ -24,7 +24,7 @@ TicTacTocSize4Board::TicTacTocSize4Board(){
         if(i % 2 == 0)
             this->board[this->rows-1][i]  = "X";
         else
-            this->board[this->rows]-1[i] = "O";
+            this->board[this->rows-1][i] = "O";
     }
 
 }

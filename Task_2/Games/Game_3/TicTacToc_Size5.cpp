@@ -121,7 +121,7 @@ void TicTacTocRandomPlayer::getmove(int& x, int& y){
     y = rand() % 5;
 }
 
-}
+
 TicTacTocAIPlayer::TicTacTocAIPlayer(const string& symbol) : Player(symbol){
     this->name = "AI Player";
 }

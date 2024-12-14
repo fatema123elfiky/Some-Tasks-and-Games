@@ -10,7 +10,7 @@ private:
 public:
     TicTacTocSize4Board();
 
-    ~TicTacTocSize4Board() override;
+    ~TicTacTocSize4Board() ;
 
     bool update_board(int x, int y, string symbol) override;
 
@@ -27,7 +27,7 @@ public:
 class TicTacTocSize4Player : public Player<string>{
 public:
     TicTacTocSize4Player(const string& n, const string& symbol) : Player<string>(n, symbol) {}
-    ~TicTacTocSize4Player() override;
+    ~TicTacTocSize4Player() ;
 
     void getmove(int& x, int& y) override;
 };

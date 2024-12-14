@@ -13,7 +13,7 @@ class TicTacToc_Size5 : public Board<string>{
 public:
     TicTacToc_Size5();
 
-    ~TicTacToc_Size5() override;
+    ~TicTacToc_Size5() ;
 
     bool update_board(int x, int y, string symbol) override;
 
@@ -29,14 +29,14 @@ public:
 class TicTacTocPlayer final : public Player<string>{
 public:
     TicTacTocPlayer(const string& n, const string& symbol) : Player<string>(n, symbol) {}
-    ~TicTacTocPlayer() override;
+    ~TicTacTocPlayer() ;
     void getmove(int& x, int& y) override;
 };
 
 class TicTacTocRandomPlayer final: public RandomPlayer<string>{
 public:
     explicit TicTacTocRandomPlayer( const string& symbol) : RandomPlayer<string>(symbol) {};
-    ~TicTacTocRandomPlayer() override;
+    ~TicTacTocRandomPlayer() ;
     void getmove(int& x, int& y) override;
 };
 
@@ -44,7 +44,7 @@ public:
 class TicTacTocAIPlayer final : public Player<string>{
 public:
     explicit TicTacTocAIPlayer(const string& symbol);
-    ~TicTacTocAIPlayer() override;
+    ~TicTacTocAIPlayer() ;
     void getmove(int& x, int& y) override;
 private:
     int calculateMinMax(string s, bool isMaximize);

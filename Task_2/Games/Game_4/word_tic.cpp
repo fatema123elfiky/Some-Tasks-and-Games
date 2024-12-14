@@ -1,6 +1,6 @@
 #include <iostream>
 #include "word_tic.h"
-#include "MinMaxPlayer.h"
+//#include "MinMaxPlayer.h"
 
 using namespace std;
 

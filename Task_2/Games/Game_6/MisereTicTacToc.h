@@ -11,7 +11,7 @@ class MisereTicTacToc : public Board<string> {
 public:
     MisereTicTacToc();
 
-    ~MisereTicTacToc() override;
+    ~MisereTicTacToc() ;
 
     bool update_board(int x, int y, string symbol) override;
 
@@ -43,7 +43,7 @@ public:
 class MisereTicTacTacAIPlayer final : public Player<string>{
 public:
     explicit MisereTicTacTacAIPlayer(const string& symbol);
-    ~MisereTicTacTacAIPlayer() override;
+    ~MisereTicTacTacAIPlayer() ;
     void getmove(int& x, int& y) override;
 
 private:
