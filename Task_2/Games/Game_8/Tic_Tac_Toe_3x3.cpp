@@ -5,7 +5,7 @@
 #include "Tic_Tac_Toe_3x3.h"
 
 
-bool Isdigit(string s){
+bool IsDigit(string s){
     for(auto c :s){
         if(!isdigit(c))
             return false;
@@ -38,8 +38,8 @@ X_O_Board::~X_O_Board() {
 
 bool X_O_Board::update_board(int x, int y, char mark) {
     // Only update if move is valid
-    if (!(x < 0 || x >= this->rows || y < 0 || y >= this->columns) && (this->board[x][y] == 0|| mark == 0)) {
-        if (mark == 0){
+    if (!(x < 0 || x >= this->rows || y < 0 || y >= this->columns) && (this->board[x][y] == '.'|| mark == '.')) {
+        if (mark == '.'){
             //undo part
             this->n_moves--;
             this->board[x][y] = 0;
@@ -159,7 +159,7 @@ void X_O_Player::getmove(int& x, int& y) {
     cin >> X ;
     cout<<"Columns : ";
     cin>> Y;
-    while (!Isdigit(X)||!Isdigit(Y)){
+    while (!IsDigit(X) || !IsDigit(Y)){
         cout<<"Enter proper numbers !!\n\n";
         cout<<"Rows : ";
         cin >> X ;

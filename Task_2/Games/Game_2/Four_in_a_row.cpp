@@ -4,7 +4,7 @@
 
 #include "Four_in_a_row.h"
 
-bool Isdigit(string s){
+bool IsDigit(string s){
     for(auto c :s){
         if(!isdigit(c))
             return false;
@@ -228,7 +228,7 @@ void Connect_Player:: getmove(int& x, int& y){
     cout<<"Please Enter the Column number : ";
     string Y;
     cin>>Y;
-    while(!Isdigit(Y)){
+    while(!IsDigit(Y)){
         cout<<"Please Enter a correct number: ";
         cin>>Y;
     }

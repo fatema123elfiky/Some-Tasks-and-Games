@@ -39,6 +39,7 @@ void Tic_Tac_Toe_9x9_board::display_board()
 
        // board[i][0]->display_row(board[i][0],board[i][1],board[i][2],i);
        board[i][0].display_row(board[i][0],board[i][1],board[i][2],i) ;
+
        cout << "\n\n";
         for (int j = 0; j < 9; ++j) {
             cout << "======";
@@ -48,6 +49,7 @@ void Tic_Tac_Toe_9x9_board::display_board()
             cout << "======";
         }
         cout << "\n\n";
+
     }
 }
 
