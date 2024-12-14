@@ -76,8 +76,11 @@ void MisereTicTacTocPlayer::getmove(int& x, int& y){
         cout << "Enter the number of rows to move: ";
         getline(cin, tempx);
 
-        if(tempx.length() == 1 && stoi(tempx) > 0 && stoi(tempx) < 4)
-            break;
+        if(tempx.length() == 1 && all_of(tempx.begin(), tempx.end(), ::isdigit)){
+            if(stoi(tempx) > 0 && stoi(tempx) < 4)
+                break;
+        }
+
         cout << "Please Enter a valid number\n";
     }
 
@@ -85,8 +88,10 @@ void MisereTicTacTocPlayer::getmove(int& x, int& y){
         cout << "Enter the number of colmns to move: ";
         getline(cin, tempy);
 
-        if(tempy.length() == 1 && stoi(tempy) > 0 && stoi(tempy) < 4)
-            break;
+        if(tempy.length() == 1 && all_of(tempy.begin(), tempy.end(), ::isdigit)){
+            if(stoi(tempy) > 0 && stoi(tempy) < 4)
+                break;
+        }
         cout << "Please Enter a valid number\n";
     }
 

@@ -230,14 +230,10 @@ void UI:: TicSize5(Player<string>*player1,Player<string>*player2,Board<string>*b
         cout<<"Enter your name ya second player : ";
         cin>>name;
         player2=new TicTacTocPlayer(name,"O");
-    }else if(type==2){
-        //AI player
-
-        // SET BOARD
-        player2->setBoard(board);
-    }else if(type==3){
-        player2=new TicTacTocRandomPlayer("O");
     }
+    else if(type==2)
+        player2=new TicTacTocRandomPlayer("O");
+
 
     Player<string>* playerPtr[2]={player1,player2};
     GameManager<string>manager(board, playerPtr);

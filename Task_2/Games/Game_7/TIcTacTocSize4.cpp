@@ -1,5 +1,5 @@
 #include "TIcTacTocSize4.h"
-
+#include <algorithm>
 TicTacTocSize4Board::TicTacTocSize4Board(){
     this->rows = 4;
     this->columns = 4;
@@ -113,8 +113,10 @@ void TicTacTocSize4Player::getmove(int& x, int& y){
             cout << "Enter the number of rows to remove from: ";
             getline(cin, tempx);
 
-            if(tempx.length() == 1 && stoi(tempx) > 0 && stoi(tempx) < 5)
-                break;
+            if(tempx.length() == 1 && all_of(tempx.begin(), tempx.end(), ::isdigit)){
+                if(stoi(tempx) > 0 && stoi(tempx) < 4)
+                    break;
+            }
             cout << "Please Enter a valid number\n";
         }
 
@@ -139,8 +141,10 @@ void TicTacTocSize4Player::getmove(int& x, int& y){
             cout << "Enter the number of rows to move: ";
             getline(cin, tempx);
 
-            if(tempx.length() == 1 && stoi(tempx) > 0 && stoi(tempx) < 5)
-                break;
+            if(tempx.length() == 1 && all_of(tempx.begin(), tempx.end(), ::isdigit)){
+                if(stoi(tempx) > 0 && stoi(tempx) < 4)
+                    break;
+            }
             cout << "Please Enter a valid number\n";
         }
 
@@ -148,8 +152,10 @@ void TicTacTocSize4Player::getmove(int& x, int& y){
             cout << "Enter the number of colmns to move: ";
             getline(cin, tempy);
 
-            if(tempy.length() == 1 && stoi(tempy) > 0 && stoi(tempy) < 5)
-                break;
+            if(tempy.length() == 1 && all_of(tempy.begin(), tempy.end(), ::isdigit)){
+                if(stoi(tempy) > 0 && stoi(tempy) < 4)
+                    break;
+            }
             cout << "Please Enter a valid number\n";
         }
 

@@ -37,6 +37,7 @@ bool TicTacToc_Size5::update_board(int x, int y, string symbol){
 
 
 void TicTacToc_Size5::display_board(){
+    cout << endl;
     for (int i = 0; i < this->rows; ++i){
         for(int j = 0; j < this->columns; ++j)
             cout << this->board[i][j] << (j != this->columns-1 ? "|" : "");
@@ -83,7 +84,8 @@ bool TicTacToc_Size5::is_win(){
 
 
 bool TicTacToc_Size5::is_draw(){
-    return this->n_moves > 24 && !is_win();
+
+    return this->n_moves > 25 && !is_win();
 }
 
 bool TicTacToc_Size5::game_is_over(){
