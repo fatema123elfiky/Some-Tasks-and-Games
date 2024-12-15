@@ -39,7 +39,7 @@ bool TicTacTocSize4Board::update_board(int x, int y, string symbol){
 
     if(symbol == "!"){
         if(this->board[x][y] == "-")
-            return true;
+            return false;
 
         this->n_moves--;
         this->board[x][y] = "-";
@@ -47,7 +47,7 @@ bool TicTacTocSize4Board::update_board(int x, int y, string symbol){
     }
 
     if (symbol == "-"){
-        if(n_moves % 2 == 1){
+        if(n_moves % 2 == 0){
             if(this->board[x][y] == "X"){
                 this->board[x][y] = "-";
                 return true;
@@ -59,11 +59,10 @@ bool TicTacTocSize4Board::update_board(int x, int y, string symbol){
             return true;
         }
         return false;
-
     }
+
     this->n_moves++;
     this->board[x][y] = symbol;
-
     return true;
 }
 
@@ -146,7 +145,7 @@ void TicTacTocSize4Player::getmove(int& x, int& y){
 
         x = placex = stoi(tempx) - 1;
         y = placey = stoi(tempy) - 1;
-    }while(this->boardPtr->update_board(x,y,"-"));
+    }while(!this->boardPtr->update_board(x,y,"-"));
 
     do{
         if(placex == x && placey == y)
@@ -176,7 +175,7 @@ void TicTacTocSize4Player::getmove(int& x, int& y){
 
         x = stoi(tempx) - 1;
         y = stoi(tempy) - 1;
-    }while(this->boardPtr->update_board(x,y,this->symbol));
+    }while(!this->boardPtr->update_board(x,y,this->symbol) || (x == placex && y == placey));
     this->boardPtr->update_board(x, y, "!");
 }
 
@@ -192,14 +191,14 @@ void TicTacTocSize4RandomPlayer::getmove(int& x, int& y){
         x = rand() % 4;
         y = rand() % 4;
         tempx = x;tempy = y;
-    }while(this->boardPtr->update_board(x,y,"-"));
+    }while(!this->boardPtr->update_board(x,y,"-"));
 
     do{
         if(tempx == x && tempy == y)
             this->boardPtr->update_board(x, y, "!");
         x = rand() % 4;
         y = rand() % 4;
-    }while(this->boardPtr->update_board(x,y,this->symbol));
+    }while(!this->boardPtr->update_board(x,y,this->symbol) || (x == tempx && y == tempy));
     this->boardPtr->update_board(x, y, "!");
 }
 

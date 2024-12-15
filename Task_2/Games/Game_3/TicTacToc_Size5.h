@@ -40,16 +40,4 @@ public:
     void getmove(int& x, int& y) override;
 };
 
-
-class TicTacTocAIPlayer final : public Player<string>{
-public:
-    explicit TicTacTocAIPlayer(const string& symbol);
-    ~TicTacTocAIPlayer() ;
-    void getmove(int& x, int& y) override;
-
-private:
-    int calculateMinMax(string s, bool isMaximize);
-    pair<int, int> BestMove();
-
-};
 #endif
