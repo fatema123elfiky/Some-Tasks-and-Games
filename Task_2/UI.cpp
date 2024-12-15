@@ -65,7 +65,7 @@ int UI::display_main_menu()
            }else if(choice=="4"){
                wordTic(player1,player2,Game,type);
            }else{
-               // Tic9x9(player1,player2,Game,type);
+               Tic9x9(player1,player2,Game,type);
            }
 
         }
@@ -124,7 +124,8 @@ int UI:: display_menu_players(string choice)
             return 2;
         }
     }
-};
+    return 0;
+}
 
 void UI:: Connect_4(Player<char>*player1,Player<char>*player2,Board<char>*board,int type)
 {
@@ -310,25 +311,25 @@ void UI:: TicSize4(Player<string>*player1,Player<string>*player2,Board<string>*b
 }
 
 // needs to be implemented //NO AI
-// void UI:: Tic9x9(Player<char>*player1,Player<char>*player2,Board<char>*board,int type){
-//     board=new Tic_Tac_Toe_9x9_board();
-//     string name;cout<<"Enter your name ya first player : ";
-//     getline(cin,name,'\n');
-//     player1=new Tic_Tac_Toe_9x9_player(name,'X');
-//     if(type==1){
-//         cout<<"Enter your name ya second player : ";
-//         getline(cin,name,'\n');
-//         player2=new Tic_Tac_Toe_9x9_player(name,'O');
-//     }/*else if(type==2){
-//      player2=new AI_Player_Connect_Four('O');
-//      // SET BOARD
-//      player2->setBoard(board);
-//    }*/else if(type==2){
-//         player2=new Tic_Tac_Toe_9x9_random_player('O');
-//     }
-//
-//
-//     Player<char>* playerPtr[2]={player1,player2};
-//     GameManager<char>manager(board, playerPtr);
-//     manager.run();
-// }
+void UI:: Tic9x9(Player<char>*player1,Player<char>*player2,Board<char>*board,int type){
+    board=new Tic_Tac_Toe_9x9_board();
+    string name;cout<<"Enter your name ya first player : ";
+    getline(cin,name,'\n');
+    player1=new Tic_Tac_Toe_9x9_player(name,'X');
+    if(type==1){
+        cout<<"Enter your name ya second player : ";
+        getline(cin,name,'\n');
+        player2=new Tic_Tac_Toe_9x9_player(name,'O');
+    }/*else if(type==2){
+     player2=new AI_Player_Connect_Four('O');
+     // SET BOARD
+     player2->setBoard(board);
+   }*/else if(type==2){
+        player2=new Tic_Tac_Toe_9x9_random_player('O');
+    }
+
+
+    Player<char>* playerPtr[2]={player1,player2};
+    GameManager<char>manager(board, playerPtr);
+    manager.run();
+}

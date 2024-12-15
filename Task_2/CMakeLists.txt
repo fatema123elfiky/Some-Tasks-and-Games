@@ -24,4 +24,7 @@ add_executable(Task_2 main.cpp
         Games/Game_1/pyramic_Tic.h
         Games/Game_1/pyramic_Tic.cpp
         Games/Game_7/TIcTacTocSize4.h
+        Games/Game_8/New_tic_tac_toe_9x9.cpp
+        Games/Game_8/New_tic_tac_toe_9x9.h
+        Games/Game_8/Tic_Tac_Toe_3x3.h
 )
