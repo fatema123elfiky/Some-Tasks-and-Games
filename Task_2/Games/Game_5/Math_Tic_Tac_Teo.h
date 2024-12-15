@@ -61,19 +61,6 @@ public:
 
 };
 
-class Math_Tic_Tac_Teo_AI_player:public Player<int>{
-private:
-
-    vector<int>Numbers;
-    int backtrack(int &x,int& y,int & symbol,int c, bool isMaximizing,bool first);
-
-
-public:
-    Math_Tic_Tac_Teo_AI_player(int c);
-    void getmove(int &x, int &y) ;
-
-
-};
 
 
 #endif //GAMES_MATH_TIC_TAC_TEO_H
