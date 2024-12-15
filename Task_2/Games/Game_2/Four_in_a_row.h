@@ -48,17 +48,5 @@ public:
 
 };
 
-class AI_Player_Connect_Four:public Player<char>{
-
-private :
-    int backtrack(int &y, char symbol,bool IsMaximizing,bool first);
-public:
-
-    AI_Player_Connect_Four(char c);
-    void getmove(int & x,int & y);
-
-
-};
-
 
 #endif //GAMES_FOUR_IN_A_ROW_H
