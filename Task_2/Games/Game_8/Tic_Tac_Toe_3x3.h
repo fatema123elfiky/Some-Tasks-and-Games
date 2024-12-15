@@ -26,6 +26,7 @@ public:
     bool game_is_over();
     ~X_O_Board();
     void setter();
+    int increment();
 
 };
 

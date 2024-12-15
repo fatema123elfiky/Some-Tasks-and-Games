@@ -60,7 +60,7 @@ bool Tic_Tac_Toe_9x9_board::game_is_over() {
 }
 
 bool Tic_Tac_Toe_9x9_board::is_draw() {
-    if(n_moves==9*9&& !is_win())
+    if((n_moves==9*9&& !is_win()))
         return true;
     return false;
 }
@@ -137,6 +137,7 @@ bool Tic_Tac_Toe_9x9_board::update_board(int x, int y, char symbol){
     if(boards[x/3][y/3].is_win())
     {
         board[x/3][y/3]=symbol;
+        n_moves+=boards[x/3][y/3].increment();
     }
     // case of draw how in the small board as it is possible or we will leave it ?
 

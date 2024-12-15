@@ -184,3 +184,15 @@ void X_O_Random_Player::getmove(int& x, int& y) {
     x = rand() % this->dimension;  // Random number between 0 and 2
     y = rand() % this->dimension;
 }
+
+int  X_O_Board::increment()
+{
+    int cntr=0;
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            if(board[i][j]=='.')
+                cntr++;
+        }
+    }
+    return cntr;
+}
