@@ -17,7 +17,8 @@ public:
     ~Connect_Board();
 
     void display_board();
-    
+
+
     bool update_board(int x, int y, char symbol);
 
     bool is_win();
@@ -46,7 +47,6 @@ public:
     void getmove(int& x, int& y);
 
 };
-
 
 
 

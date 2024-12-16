@@ -235,4 +235,3 @@ void Connect_Random_Player::getmove(int& x, int& y)
 
 
 
-
