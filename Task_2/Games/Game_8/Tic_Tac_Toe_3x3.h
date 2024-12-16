@@ -19,12 +19,16 @@ public:
     X_O_Board ();
     bool update_board (int x , int y , char symbol);
     void display_board () ;
+
     //for 9*9 xo
     void display_row(const X_O_Board &board1,const X_O_Board &board2,const X_O_Board &board3,int k);
+
     bool is_win() ;
     bool is_draw();
     bool game_is_over();
     ~X_O_Board();
+
+    //for 9*9 xo
     void setter();
     int increment();
 

@@ -17,10 +17,11 @@ bool Isdigit(string s){
 
 Tic_Tac_Toe_9x9_board::Tic_Tac_Toe_9x9_board() {
 
-
+// here we construct two boards the representative and the whole ones
     this->n_moves=0;
     this->rows=this->columns=3;
 
+  // here we initialize the whole board
     boards = new X_O_Board *[3];
     for (int i = 0; i < rows; ++i) {
         boards[i]=new X_O_Board [3];
@@ -31,6 +32,7 @@ Tic_Tac_Toe_9x9_board::Tic_Tac_Toe_9x9_board() {
         }
     }
 
+    // here we initialize the representative board
     board=new char* [rows];
     for (int i = 0; i < rows; ++i) {
         board[i]=new char [columns];
@@ -102,7 +104,7 @@ void Tic_Tac_Toe_9x9_board::display_board()
     cout<<"\n\n";
     for (int i = 0; i < 3; ++i) {
 
-
+        // here we display row by row of boards
         boards[i][0].display_row(boards[i][0],boards[i][1],boards[i][2],i*3) ;
 
 
@@ -115,18 +117,23 @@ void Tic_Tac_Toe_9x9_board::display_board()
     }
 }
 
-// some work will be added
+
 bool Tic_Tac_Toe_9x9_board::update_board(int x, int y, char symbol){
 
+    // validation for bounds
     if(x>=9||x<0||y>=9||y<0)
     {
         cout<<"Out of bounderies \n\n";
         return false;
     }
+
+    // if that board is win so ,we will not use it will be blocked
     if(boards[x/3][y/3].is_win())
     {
         return false;
     }
+
+    // if that place is taken will return false
     if (!boards[x/3][y/3].update_board(x-3*(x/3),y-3*(y/3),symbol))
     {
         cout<<"Try again !!\n\n";
@@ -134,12 +141,14 @@ bool Tic_Tac_Toe_9x9_board::update_board(int x, int y, char symbol){
     }
 
     n_moves++;
+
+    // for some case of drawing
     if(boards[x/3][y/3].is_win())
     {
         board[x/3][y/3]=symbol;
         n_moves+=boards[x/3][y/3].increment();
     }
-    // case of draw how in the small board as it is possible or we will leave it ?
+
 
     return true;
 
@@ -172,6 +181,7 @@ Tic_Tac_Toe_9x9_player::Tic_Tac_Toe_9x9_player(string n, char c) : Player<char>(
 
 void Tic_Tac_Toe_9x9_player:: getmove(int& x, int& y)
 {
+    // taking  the location of the cell to put in and some validations
     string X,Y;
 
     again:
@@ -198,6 +208,7 @@ void Tic_Tac_Toe_9x9_player:: getmove(int& x, int& y)
 //CLASS RANDOM PLAYER
 Tic_Tac_Toe_9x9_random_player::Tic_Tac_Toe_9x9_random_player(char c): RandomPlayer<char>(c)
 {
+    // giving the name value
     this->dimension=9;
     this->name="Random Computer Player";
     srand(static_cast<int>(time(0)));
@@ -205,6 +216,7 @@ Tic_Tac_Toe_9x9_random_player::Tic_Tac_Toe_9x9_random_player(char c): RandomPlay
 
 void Tic_Tac_Toe_9x9_random_player:: getmove(int& x, int& y)
 {
+    // randomize the location
     x=rand()%this->dimension;
     y=rand()%this->dimension;
 }

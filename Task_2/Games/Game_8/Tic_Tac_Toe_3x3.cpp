@@ -13,7 +13,7 @@ inline bool IsDigit(string s){
     return true;
 }
 
-// Constructor for X_O_Board
+
 
 X_O_Board::X_O_Board() {
     this->rows = this->columns = 3;
@@ -75,6 +75,7 @@ void X_O_Board::display_board() {
         cout<<'\n';
     }
 }
+
 // for the 9x9 xo displaying
 void X_O_Board::display_row(const X_O_Board &board1,const X_O_Board &board2,const X_O_Board &board3,int k)
 {
@@ -107,7 +108,7 @@ void X_O_Board::display_row(const X_O_Board &board1,const X_O_Board &board2,cons
     }
 
 }
-// Returns true if there is any winner
+
 
 bool X_O_Board::is_win() {
     // Check rows and columns
@@ -127,7 +128,7 @@ bool X_O_Board::is_win() {
     return false;
 }
 
-// Return true if 9 moves are done and no winner
+
 
 bool X_O_Board::is_draw() {
     return (this->n_moves == 9 && !is_win());
