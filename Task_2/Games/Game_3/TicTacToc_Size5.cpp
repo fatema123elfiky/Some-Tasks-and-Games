@@ -110,11 +110,11 @@ bool TicTacToc_Size5::is_win(){
 
 
 bool TicTacToc_Size5::is_draw(){
-    return this->n_moves == 25 && !is_win();
+    return this->n_moves == 25 ;
 }
 
 bool TicTacToc_Size5::game_is_over(){
-    return is_win() || is_draw();
+    return is_draw();
 }
 
 TicTacTocPlayer::~TicTacTocPlayer() = default;
