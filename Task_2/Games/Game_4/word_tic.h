@@ -6,12 +6,14 @@
 #include <fstream>
 #include<unordered_set>
 #include <limits>
-
+//class for word game board
 template <typename T>
 class Word_Board:public Board<T> {
 public:
     Word_Board ();
+    //vector to put the valid words in it
     vector<string>check;
+    //function to fill the vector
     void setvector(); 
     bool update_board (int x , int y , T symbol);
     void display_board () ;
@@ -22,16 +24,19 @@ public:
 };
 template<typename T>
 void Word_Board<T>::setvector() {
+    //open dictionary file
         fstream file("dic.txt");
         if (!file.is_open()){
             cout<<"file can not be opened !!";
         }
         string line;
         while(getline(file,line)){
+            //put the line in vector
             check.push_back(line);
-        }
-
+        }//close the file after fill the vector
+file.close();
     }
+    //class for word player
 template <typename T>
 class Word_Player: public Player<T>{
 public:
@@ -39,7 +44,7 @@ public:
     void getmove(int& x, int& y) ;
 
 };
-
+//class for random word player
 template <typename T>
 class Word_Random_Player : public RandomPlayer<T>{
 public:
@@ -61,20 +66,24 @@ using namespace std;
 // Constructor for Word_Board
 template <typename T>
 Word_Board<T>::Word_Board() {
+    //set 3*3 board
     this->rows = this->columns = 3;
     this->board = new char*[this->rows];
     for (int i = 0; i < this->rows; i++) {
         this->board[i] = new char[this->columns];
         for (int j = 0; j < this->columns; j++) {
+            //assign board with space
             this->board[i][j] = ' ';
         }
     }
     this->n_moves = 0;
+    //assign the vector attribute
     if(check.empty()) {
         setvector();
     }
 
 }
+//Destructor for word board to delete the 2d dinamic array
 template<typename T>
 Word_Board<T>::~Word_Board() {
     for (int i = 0; i < this->rows; ++i) {
@@ -82,7 +91,6 @@ Word_Board<T>::~Word_Board() {
     }
     delete [] this->board;
 }
-
 template <typename T>
 bool Word_Board<T>::update_board(int x, int y, T mark) {
     // Only update if move is valid
@@ -147,6 +155,7 @@ unordered_set<string> words;
     
     for (auto it=words.begin();it!=words.end();++it ) {
         for (int i = 0; i <check.size() ; ++i) {
+ //check for the word and its inverse
            string inverse=(*it);
             char temp=inverse[2];
             inverse[2]=inverse[0];
@@ -166,18 +175,18 @@ template <typename T>
 bool Word_Board<T>::is_draw() {
     return (this->n_moves == 9 && !is_win());
 }
-
+//return true if there is a winner or there is draw
 template <typename T>
 bool Word_Board<T>::game_is_over() {
     return is_win() || is_draw();
 }
 
-//--------------------------------------
 
 // Constructor for Word_Player
 template <typename T>
 Word_Player<T>::Word_Player(string name) : Player<T>(name, ' ') {}
-
+//get move as x and y and get the symbol to play with
+// and the validation to get them
 template <typename T>
 void Word_Player<T>::getmove(int& x, int& y) {
     cout << "\nBoundries of move x and y (0 to 2) \n"
