@@ -68,10 +68,7 @@ void Math_Tic_Tac_Teo_board::display_board()
 
 bool Math_Tic_Tac_Teo_board::update_board(int x, int y, int symbol)
 {
-    //could I validate in the get move function of the player that if he is the first player should be odd otherwise
-    /*||symbol<1||symbol>9*///not imp
 
-    // for the ai part in the backtrack the undo part
 
     if(symbol==0){
         board[x][y]=0;
@@ -81,28 +78,26 @@ bool Math_Tic_Tac_Teo_board::update_board(int x, int y, int symbol)
     }
 
 
-    /*if(*//*symbol!=0&&*//*(x>=rows||x<0||y>=columns||y<0)&&!Valid_Number[symbol]){
-       cout<<"Try again !!\n\n";
-       return false;
-    }*/
+  // Checking for a valid range or location
 
     if(x>=rows||x<0||y>=columns||y<0) {
        cout<<"Out of Bounderies !! \n";
         return false;
     }
 
+    // Check weather that place is taken or not
     if(board[x][y]!=0) {
-        //cout<<"This place is filled with number !! \n\n";
+
         return false;
     }
     else{
-        if(/*symbol!=0&&*/!Valid_Number[symbol]) {
-          // cout<<" This number is taken before !!\n\n";
+        // check weather that number used before or not in the board
+        if(!Valid_Number[symbol]) {
             return false;
         }
         board[x][y]=symbol;
-        n_moves++;
-        /*if(symbol!=0){*/ Valid_Number[symbol] = false; //}
+        n_moves++;// increment of number of moves
+        Valid_Number[symbol] = false;
         return true;
     }
 
@@ -110,8 +105,6 @@ bool Math_Tic_Tac_Teo_board::update_board(int x, int y, int symbol)
 
 bool Math_Tic_Tac_Teo_board::is_draw()
 {
-    //we can add && !is_win or not too it will be dummy to be added
-    // and will not be efficient as win fun is O(n^2)
 
     if(n_moves==3*3&& !is_win())
         return true;
@@ -129,6 +122,7 @@ bool Math_Tic_Tac_Teo_board:: game_is_over()
 
 bool Math_Tic_Tac_Teo_board:: is_win()
 {
+
     for (int i = 0; i < rows; ++i) {
 
         if( board[i][0]!=0 && board[i][1]!=0 && board[i][2]!=0 && board[i][0]+board[i][1]+board[i][2]==15 )//rows
@@ -153,6 +147,8 @@ bool Math_Tic_Tac_Teo_board:: is_win()
 
 
 Math_Tic_Tac_Teo_player::Math_Tic_Tac_Teo_player(string n , int c): Player<int>(n,c){
+
+    // determination of the type of the player
     if(c==1) {
         Numbers = {1, 3, 5, 7, 9};
     }
@@ -160,11 +156,12 @@ Math_Tic_Tac_Teo_player::Math_Tic_Tac_Teo_player(string n , int c): Player<int>(
         Numbers = {2, 4, 6, 8};
     }
 
-   // setBoard(); in the main we will set the board in the player to validate only  and update_board will not validate
+
 }
 
 void Math_Tic_Tac_Teo_player:: getmove(int& x, int& y)
 {
+    // taking a number in my valid range and taking the location of the cell and some validations
  X:
    cout<<"Enter a different ";
     if(symbol%2!=0)
@@ -214,25 +211,29 @@ again:
 
 Math_Tic_Tac_Teo_random_player::Math_Tic_Tac_Teo_random_player(int c): RandomPlayer<int>(c)
 {
+    // determination of the type of the player as even or odd and giving him a name
+
     this->name="Random Computer Player";
     if(c==1) {
         Numbers = {1, 3, 5, 7, 9};
-        //Valid_Number = {true, true, true, true,true};
+
     }
     else {
         Numbers = {2, 4, 6, 8};
-       // Valid_Number={true,true,true,true};
+
     }
 
     srand(static_cast<unsigned int>(time(0)));
 
     this->dimension=3;
 
-
 }
 
 void Math_Tic_Tac_Teo_random_player::getmove(int &x, int &y) {
+
     int num;
+
+    // here we randomize the taken number
     if(symbol%2!=0){
         num = rand() % 10;
         while (find(Numbers.begin(),Numbers.end(),num)==Numbers.end()){
@@ -244,7 +245,10 @@ void Math_Tic_Tac_Teo_random_player::getmove(int &x, int &y) {
             num = rand() % 9;
         }
     }
+
     symbol=num;
+
+    // here we randomize the location of the cell
     x=rand()%dimension;
     y=rand()%dimension;
 }

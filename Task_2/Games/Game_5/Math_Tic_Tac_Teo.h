@@ -13,7 +13,7 @@ inline bool Isdigit(string s);
 class Math_Tic_Tac_Teo_board: public Board<int>
 {
 private:
-    vector<bool>Valid_Number;
+    vector<bool>Valid_Number;// vector to know which numbers to use only once
 public:
 
     Math_Tic_Tac_Teo_board();
@@ -38,9 +38,10 @@ public:
 
 class Math_Tic_Tac_Teo_player:public Player<int>
 {
-private:
-    vector<int>Numbers;
 
+private:
+
+    vector<int>Numbers;// that vector for the ranges of the numbers that the player play with
 
 public:
 
@@ -53,7 +54,7 @@ public:
 class Math_Tic_Tac_Teo_random_player:public RandomPlayer<int>{
 
 private:
-    vector<int>Numbers;
+    vector<int>Numbers;// that vector for the ranges of the numbers that the player play with
 
 public:
     Math_Tic_Tac_Teo_random_player(int c);
@@ -61,6 +62,21 @@ public:
 
 };
 
+/*
+class Math_Tic_Tac_Teo_AI_player:public Player<int>{
+private:
+
+    vector<int>Numbers;
+    int backtrack(int &x,int& y,int & symbol,int c, bool isMaximizing,bool first);
+
+
+public:
+    Math_Tic_Tac_Teo_AI_player(int c);
+    void getmove(int &x, int &y) ;
+
+
+};
+*/
 
 
 #endif //GAMES_MATH_TIC_TAC_TEO_H
