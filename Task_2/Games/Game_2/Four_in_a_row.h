@@ -17,8 +17,7 @@ public:
     ~Connect_Board();
 
     void display_board();
-
-    //of course a value will be given to y and symbol but x no
+    
     bool update_board(int x, int y, char symbol);
 
     bool is_win();
@@ -47,6 +46,8 @@ public:
     void getmove(int& x, int& y);
 
 };
+
+
 
 
 #endif //GAMES_FOUR_IN_A_ROW_H

@@ -66,11 +66,8 @@ void Connect_Board::display_board()
 
 bool Connect_Board::update_board(int x, int y, char symbol)
 {
- // the coming one (x) is always (5) then change it
-    //x=5;
 
 
-    //That part for undo part in the ai player backtrack !!
     if(symbol=='.'){
         x=0;
         while(x<=5){
@@ -83,18 +80,21 @@ bool Connect_Board::update_board(int x, int y, char symbol)
         }
     }
 
+    // the coming one (x) is always (5) then change it to see the valid place
 
 
+   // Validating the columns
     if(y<0||y>=columns) {
         cout<<"Out of Bounderies !! \n\n";
         return false;
     }
+    // check for the right empty place
     while (x>=0&&board[x][y]!='.'){
         x--;
     }
 
+    //check weather if that column is filled or not
     if(x<0) {
-        //cout<<"Try another column !!\n";
         return false;
     }
     else {
@@ -106,10 +106,10 @@ bool Connect_Board::update_board(int x, int y, char symbol)
     return true;
 
 }
-// Revise
+
 bool Connect_Board:: is_win()
 {
-    //bool Is_win= false;
+
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < columns; ++j) {
 
@@ -121,8 +121,6 @@ bool Connect_Board:: is_win()
 
                 if(board[i][j]==board[i][j-1]&&board[i][j]==board[i][j-2]&&board[i][j]==board[i][j-3])
                     return true;
-
-
 
             }
             if(j+3<columns){//front horizontal
@@ -141,31 +139,25 @@ bool Connect_Board:: is_win()
                 if(board[i][j]==board[i+1][j]&&board[i][j]==board[i+2][j]&&board[i][j]==board[i+3][j])
                     return true;
 
-
             }
-            if(i-3>=0&&j-3>=0){//back off diagonal
+            if(i-3>=0&&j-3>=0){//back main diagonal
 
                 if(board[i][j]==board[i-1][j-1]&&board[i][j]==board[i-2][j-2]&&board[i][j]==board[i-3][j-3])
                     return true;
 
-
             }
-            if(i+3<rows&&j+3<columns){//front off diagonal
-
+            if(i+3<rows&&j+3<columns){//front main diagonal
 
                 if(board[i][j]==board[i+1][j+1]&&board[i][j]==board[i+2][j+2]&&board[i][j]==board[i+3][j+3])
                     return true;
 
-
             }
-            if(i+3<rows&&j-3>=0){// back main diagonal
+            if(i+3<rows&&j-3>=0){// back off diagonal
 
                 if(board[i][j]==board[i+1][j-1]&&board[i][j]==board[i+2][j-2]&&board[i][j]==board[i+3][j-3])
                     return true;
-
-
             }
-            if(i-3>=0&&j+3<columns){//ba
+            if(i-3>=0&&j+3<columns){//front off diagonal
 
                 if(board[i][j]==board[i-1][j+1]&&board[i][j]==board[i-2][j+2]&&board[i][j]==board[i-3][j+3])
                     return true;
@@ -182,8 +174,7 @@ bool Connect_Board:: is_win()
 
 bool Connect_Board::is_draw(){
 
-    //we can add && !is_win or not too it will be dummy to be added
-    // and will not be efficient as win fun is O(n^2)
+
     if(n_moves==6*7&& !is_win())
         return true;
     return false;
@@ -202,14 +193,11 @@ bool Connect_Board:: game_is_over()
 
 //class Connect_Player
 
-Connect_Player::Connect_Player(string n, char c):Player<char>(n,c){
-    // for some reason are commented for trial
-    /*this->name=n;
-    this->symbol=c;*/
-}
+Connect_Player::Connect_Player(string n, char c):Player<char>(n,c){}
 
 void Connect_Player:: getmove(int& x, int& y){
 
+    // taking the column number and validating on it
     x=5;
     cout<<"Please Enter the Column number : ";
     string Y;
@@ -230,7 +218,8 @@ void Connect_Player:: getmove(int& x, int& y){
 
 Connect_Random_Player::Connect_Random_Player(char c) : RandomPlayer<char>(c)
 {
-   this->name="Random Computer Player";// but it will change the value as the parent set a value before
+    // giving name to the player
+   this->name="Random Computer Player";
    srand(static_cast<unsigned int>(time(0)));
    this->dimension=7;
 
@@ -238,9 +227,11 @@ Connect_Random_Player::Connect_Random_Player(char c) : RandomPlayer<char>(c)
 
 void Connect_Random_Player::getmove(int& x, int& y)
 {
+   // randomize the column number
    x=5;
    y=rand()%dimension;
 }
+
 
 
 
