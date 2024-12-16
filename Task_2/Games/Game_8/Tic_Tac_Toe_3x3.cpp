@@ -150,6 +150,7 @@ void X_O_Board::setter()
 
 
 
+
 int  X_O_Board::increment()
 {
     int cntr=0;
