@@ -39,7 +39,7 @@ public:
 
     static void MathTic(Player<int>*player1,Player<int>*player2,Board<int>*board,int type);
 
-    static void Misere(Player<string>*player1,Player<string>*player2,Board<string>*board,int type);
+    static void Misere(Player<string>*player1,Player<string>*player2,Board<string>*board,int type_2);
 
     static void TicSize4(Player<string>*player1,Player<string>*player2,Board<string>*board,int type);
 

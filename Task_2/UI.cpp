@@ -224,28 +224,51 @@ void UI::wordTic(Player<char> *player1, Player<char> *player2, Board<char> *boar
 
 }
 
-void UI:: Misere(Player<string>*player1,Player<string>*player2,Board<string>*board,int type)
-{
+void UI:: Misere(Player<string>*player1,Player<string>*player2,Board<string>*board,int type){
     board=new MisereTicTacToc();
     string name1, name2;
-    cout<<"Enter your name ya first player : ";
-    getline(cin,name1,'\n');
-    if(type==1){
-        player2 = new MisereTicTacTacAIPlayer("O", name1);
-        player2->setBoard(board);
-        name2 = "AI Player";
-    }else if(type==2){
+
+    if(type == 1)
+        name1 =  "AI Player 1";
+    if(type==2){
+        cout<<"Enter your name ya first player : ";
+        getline(cin,name1,'\n');
+    }
+    else if(type==3)
+        name1 =  "Random Computer Player 1";
+
+    int type_2 = display_menu_players("6");
+
+    if(type_2 == 1)
+        name2 =  "AI Player 2";
+    if(type_2==2){
         cout<<"Enter your name ya second player : ";
         getline(cin,name2,'\n');
-        player2=new MisereTicTacTocPlayer(name1,"O");
-    }else if(type==3){
-        player2=new MisereTicTacTocRandomPlayer(name1,"O");
-        name2 = "Random Player";
-
     }
-    player1=new MisereTicTacTocPlayer(name2,"X");
+    else if(type_2==3)
+        name2 =  "Random Computer Player 2";
+
+
+    if(type==1){
+        player1 = new MisereTicTacTacAIPlayer("X", name2);
+        player1->setBoard(board);
+    }
+    else if(type==2)
+        player1=new MisereTicTacTocPlayer(name2,"X");
+    else if(type==3)
+        player1=new MisereTicTacTocRandomPlayer("X" , name2);
+
+    if(type_2==1){
+        player2 = new MisereTicTacTacAIPlayer("O", name1);
+        player2->setBoard(board);
+    }
+    else if(type_2==2)
+        player2=new MisereTicTacTocPlayer(name1,"O");
+    else if(type_2==3)
+        player2=new MisereTicTacTocRandomPlayer("O",name1);
 
     Player<string>* playerPtr[2]={player1,player2};
+
     GameManager<string>manager(board, playerPtr);
     manager.run();
 
