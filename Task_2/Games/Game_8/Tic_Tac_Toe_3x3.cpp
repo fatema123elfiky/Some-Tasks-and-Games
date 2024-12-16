@@ -149,42 +149,6 @@ void X_O_Board::setter()
 }
 
 
-// Constructor for X_O_Player
-
-X_O_Player::X_O_Player(string name, char symbol) : Player<char>(name, symbol) {}
-
-
-void X_O_Player::getmove(int& x, int& y) {
-    cout << "\nPlease enter your move x and y (0 to 2) separated by spaces: ";
-    string X,Y;
-    cout<<"Rows : ";
-    cin >> X ;
-    cout<<"Columns : ";
-    cin>> Y;
-    while (!IsDigit(X) || !IsDigit(Y)){
-        cout<<"Enter proper numbers !!\n\n";
-        cout<<"Rows : ";
-        cin >> X ;
-        cout<<"Columns : ";
-        cin>> Y;
-    }
-    x= stoi(X);
-    y= stoi(Y);
-}
-
-// Constructor for X_O_Random_Player
-
-X_O_Random_Player::X_O_Random_Player(char symbol) : RandomPlayer<char>(symbol) {
-    this->dimension = 3;
-    this->name = "Random Computer Player";
-    srand(static_cast<unsigned int>(time(0)));  // Seed the random number generator
-}
-
-
-void X_O_Random_Player::getmove(int& x, int& y) {
-    x = rand() % this->dimension;  // Random number between 0 and 2
-    y = rand() % this->dimension;
-}
 
 int  X_O_Board::increment()
 {

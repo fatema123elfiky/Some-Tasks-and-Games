@@ -35,20 +35,6 @@ public:
 };
 
 
-class X_O_Player : public Player<char> {
-public:
-    X_O_Player (string name, char symbol);
-    void getmove(int& x, int& y) ;
-
-};
-
-
-class X_O_Random_Player : public RandomPlayer<char>{
-public:
-    X_O_Random_Player (char symbol);
-    void getmove(int &x, int &y) ;
-};
-
 
 
 
