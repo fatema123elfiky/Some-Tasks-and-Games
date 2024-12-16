@@ -4,11 +4,12 @@
 
 
 #include "../../src/BoardGame_Classes.h"
-//Directions of neighbours
-          // R    L     D    U     RD   LD
-inline int X[6] = {  0 ,   0 , +1 , -1 ,  +1 ,  -1 };
+//Directions of neighbours  to check the winner
+          //           R        L       D        U         RD       LD
+inline int X[6] = {  0 ,   0 , +1 , -1 ,  +1 ,  +1 };
 inline int Y[6] = { +1 ,  -1 ,  0 ,  0 ,  +1 ,  -1 };
 template <typename T>
+//class of game board
 class Pyramic_Board:public Board<T> {
 public:
     Pyramic_Board ();
@@ -19,7 +20,7 @@ public:
     bool game_is_over();
     ~Pyramic_Board();
 };
-
+//class of player of pyramic game
 template <typename T>
 class Pyramic_Player : public Player<T> {
 public:
@@ -27,7 +28,7 @@ public:
     void getmove(int& x, int& y) ;
 
 };
-
+//class of random player of pyramic game
 template <typename T>
 class Pyramic_Random_Player : public RandomPlayer<T>{
 public:
@@ -39,17 +40,18 @@ public:
 
 
 
-//--------------------------------------- IMPLEMENTATION
+//*IMPLEMENTATION* ^_^
 
 #include <iostream>
 #include <iomanip>
 #include <cctype>  // for toupper()
-
+#include <limits>
 using namespace std;
 
-// Constructor for X_O_Board
+// Constructor for Pyramic_Board
 template <typename T>
 Pyramic_Board<T>::Pyramic_Board() {
+    //board 3*5
     this->rows =3;
     this->columns = 5;
     this->board = new char*[this->rows];
@@ -57,16 +59,19 @@ Pyramic_Board<T>::Pyramic_Board() {
         this->board[i] = new char[this->columns];
         for (int j = 0; j < this->columns; j++) {
             if (((j == 0||j==4)&&i!=2)||(i==0&&(j==3||j==1))) {
+                //assign out of the line of pyramid with char 0
                 this->board[i][j] = '0';
             }else {
+                //assign where we play to null char
                 this->board[i][j] = 0;
             }
 
         }
-    }
+    }//assign n-moves with 0
     this->n_moves = 0;
 }
 template <typename T>
+//destructor of Pytamic board to delete the Dynamic array
 Pyramic_Board<T>::~Pyramic_Board() {
     for (int i = 0; i < this->rows; ++i) {
         delete [] this->board[i];
@@ -83,8 +88,7 @@ bool Pyramic_Board<T>::update_board(int x, int y, T mark) {
     }
     return false;
 }
-//+-------+
-//|( , )a |
+
 // Display the board and the pieces on it
 template <typename T>
 void Pyramic_Board<T>::display_board() {
@@ -143,13 +147,14 @@ bool Pyramic_Board<T>::is_win() {
         for (int j = 0; j < 6; j++) {
             int colomn=2;
             int m1=X[j],m2=Y[j];
+            //check the index and its neighbour and its neighbour from the direction
             if (i+2*m1<this->rows&&i+2*m1>=0&&colomn+2*m2<this->columns&&colomn+2*m2>=0) {
                 if (this->board[i+2*m1][colomn+2*m2]==this->board[i][2]&&this->board[i][2]==this->board[i+m1][colomn+m2]&&this->board[i][2]!=0) {
                     return true;
                 }
 
             }
-
+                   //check the neighbour from different sides
             if((j!=5||j!=4)&&i+m1<this->rows&&i+m1>=0&&i-m1<this->rows&&i-m1>=0&&colomn+m2<this->columns&&colomn+m2>=0&&colomn-m2<this->columns&&colomn-m2>=0) {
                 if (this->board[i+m1][2+m2]==this->board[i][2]&&this->board[i][2]==this->board[i-m1][colomn-m2]&&this->board[i][2]!=0) {
                     return true;
@@ -166,22 +171,42 @@ template <typename T>
 bool Pyramic_Board<T>::is_draw() {
     return (this->n_moves == 9 && !is_win());
 }
-
+//return true if there is win or draw
 template <typename T>
 bool Pyramic_Board<T>::game_is_over() {
     return is_win() || is_draw();
 }
 
-//--------------------------------------
 
 // Constructor for Pyramic_Player
 template <typename T>
 Pyramic_Player<T>::Pyramic_Player(string name, T symbol) : Player<T>(name, symbol) {}
-
+//function to get move
 template <typename T>
 void Pyramic_Player<T>::getmove(int& x, int& y) {
-    cout << "\nPlease enter your move x and y (0 to 2) separated by spaces: ";
-    cin >> x >> y;
+    cout << "Boundries of move x and y as it is showed in the pyramid \n"
+         <<"X:";
+    cin >> x ;
+    cout<<"\n";
+    while (cin.fail()) {
+        cin.clear();
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n');
+        cout<<"please enter your move x right \n"
+            <<"X:";
+        cin >>x ;
+        cout<<"\n";
+    }
+    cout << "Y:";
+    cin >> y ;
+    cout<<"\n";
+    while (cin.fail()) {
+        cin.clear();
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n');
+        cout<<"please enter your move Y right \n"
+            <<"Y:";
+        cin >>y ;
+        cout<<"\n";
+    }
 }
 
 // Constructor for X_O_Random_Player
@@ -195,44 +220,14 @@ template <typename T>
 void Pyramic_Random_Player<T>::getmove(int& x, int& y) {
 
     x = rand() % 3;  // Random number between 0 and 2
-    y = rand() % 5;
+    y = rand() % 5;// Random number between 0 and 5
+    //check if it is with in the interval or not
 while (((y == 0||y==4)&&x!=2)||(x==0&&(y==3||y==1)))
     {
 
-     x = rand() % this->dimension;
-     y = rand() % this->dimension;
+     x = rand() % 3;
+     y = rand() % 5;
     }
 
 }
-
-
-
-
-
-
-/*
-void Pyramic_Board<T>::display_board() {
-    for (int i = 0; i < this->rows; i++) {
-
-        // Now print the board content for each row (symbols, numbers, etc.)
-        for (int j = 0; j < this->columns; j++) {
-            if (this->board[i][j] != '0') { // Skip empty cells
-                cout  << "| " << "(" << i << "," << j << ")";
-                cout  << setw(1) << this->board[i][j] << " |";
-            }else{
-            cout<<"          "
-            }
-        }
-        cout<<endl;
-    }
-    cout <<"+---------+---------+---------+---------+---------+" << endl;
-}
-
-
-*/
-
-
-
-
-
 #endif //PYRAMIC_TIC_H
