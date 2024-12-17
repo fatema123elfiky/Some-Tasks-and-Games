@@ -364,6 +364,10 @@ void UI:: TicSize4(Player<string>*player1,Player<string>*player2,Board<string>*b
 
 
     Player<string>* playerPtr[2]={player1,player2};
+
+    for(auto player : playerPtr)
+        player->setBoard(board);
+
     GameManager<string>manager(board, playerPtr);
     manager.run();
 
