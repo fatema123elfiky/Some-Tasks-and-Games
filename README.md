@@ -3,10 +3,10 @@ Applying Some concepts for Dr.Mohamed ElRamly through some tasks and games
 
 ##### There were Tasks and some of them are 👨‍💻 :
 
-1.Implementing a Task manager
-2.Similarty of Documents and queries
-3.Figures
-4.Games of life 
+###### 1.Implementing a Task manager
+###### 2.Similarty of Documents and queries
+###### 3.Figures
+###### 4.Games of life 
 
 # UML Diagram for the Games app
 https://miro.com/app/board/uXjVLAIBQSI=/?share_link_id=394316019525
