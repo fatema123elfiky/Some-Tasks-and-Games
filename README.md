@@ -1,7 +1,7 @@
 # Some-Tasks-and-Games
 Applying Some concepts for Dr.Mohamed ElRamly through some tasks and games
 
-# There were Tasks and some of them are 👨‍💻 :
+##### There were Tasks and some of them are 👨‍💻 :
 
 1.Implementing a Task manager
 2.Similarty of Documents and queries
